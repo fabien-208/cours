@@ -1,2 +1,2 @@
 # cours L1
-cours: L1/cours
+cours: [L1/cours]

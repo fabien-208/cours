@@ -1,0 +1,150 @@
+#exercice 1
+
+def rotation(liste):
+    """
+    fonction qui decale d'un rang les élément d'une liste
+    :param:une liste
+    :return:une nouvelle liste
+    """
+    dernierelement=liste.pop(-1)
+    newliste=liste[:]
+    newliste.insert(0,dernierelement)
+    return newliste
+#programme principal
+print("exercice 1")
+maliste=[1,2,3,4]
+print(rotation(maliste))
+
+#exercice 2
+
+def inverser(liste):
+    """
+    fonction qui inverse l'ordre des éléments
+    :param:une liste
+    :return:une nouvelle liste
+    """
+    newliste=liste[:]
+    newliste.reverse()
+    return newliste
+#programme principal
+print("exercice 2")
+liste=[1,2,3,4]
+print(inverser(liste))
+
+
+#exercice 3
+
+def suprimer_rang(liste,rang):
+    """
+    permet de suprimer un élément de rang n
+    :param:une liste
+    :param:un entier pour le rang
+    :return:liste modifié
+    """
+    liste.pop(rang)
+    return liste
+#programme principal
+print("exercice 3")
+ma_liste=[8,7,6,5,4]
+print(suprimer_rang(ma_liste,2))
+
+
+#exercice 4
+
+def suprimer_element(liste,element):
+    """
+    permet de suprimer un element de la liste
+    :param:une liste
+    :param:un entier pour l'element
+    :return:liste modifié
+    """
+    while element in liste:
+        liste.remove(element)
+    return liste
+#programme principal
+print("exercice 4")
+ma_liste=[8,7,4,6,5,4]
+print(suprimer_element(ma_liste,4))
+
+#exercice 5
+
+def structure_de_donnée_python(liste):
+    """
+    permet de triez la liste,d'ajouter des éléments, de renversez, affichez les indices, d'enlever des éléments et d'afficher des sous-liste
+    :param:une liste
+    :return:une liste modifié
+    """
+#programme principal
+print("exercice 5")
+liste=[17,38,10,25,72]
+liste.sort()
+print(liste)
+liste.append(12)
+liste.reverse()
+print(liste)
+liste.index(17)
+liste.remove(38)
+print(liste)
+sousliste=liste[2:3]
+print(sousliste)
+sousliste=liste[:2]
+print(sousliste)
+sousliste=liste[3:]
+print(sousliste)
+sousliste=liste[:]
+print(sousliste)
+print(liste[-1])
+
+
+
+#exercice 6
+
+def min_d_une_liste(liste):
+    """
+    perlet de trouver le minimum d'une liste
+    :param:liste
+    return:un element
+    """
+    mini=liste[0]
+    pas=0
+    fin=len(liste)
+    for i in range(1,fin):
+        if liste[1]<mini:
+            mini=liste[i]
+            pas=i
+    return mini,pas
+#programme principal
+liste=[10,5,89,2]
+mini=liste[0]
+pas=0
+fin=len(liste)
+for i in range:
+    if liste[1]<mini:
+        mini=liste[i]
+        pas=i
+    return mini,pas
+
+#exercice  7
+#1)
+
+def estdans(liste,x):
+    """
+    permet de savoir si l'element est dans la liste
+    :param:liste
+    :return:un element
+    """
+    L=liste
+    x=element
+    if x in L:
+        print(True)
+    else:
+        print(False)
+    return element
+#programme principal
+liste=[12,5,3,98,1]
+L=liste
+x=5
+if x in list:
+    print(True)
+else:
+    print(False)

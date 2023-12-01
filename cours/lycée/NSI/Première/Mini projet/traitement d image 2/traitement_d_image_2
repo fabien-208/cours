@@ -1,0 +1,64 @@
+# Créé par 1SI, le 03/01/2022 en Python 3.7
+
+#title: Manipulation d'image avec Python - Partie 2
+
+from PIL import Image
+
+img = Image.new("RGB", (255, 255))
+(width, height) = img.size
+for col in range(width):
+	for ligne in range(height):
+		pix = (col, ligne)
+		couleur = (255, 0, 0) # (Rouge,vert,bleu)
+		img.putpixel(pix, couleur)
+
+rouge =255
+vert =0
+img = Image.new("RGB", (255, 255))
+(width, height) = img.size
+for col in range(width):
+    vert=vert+1
+    rouge=255
+    for ligne in range(height):
+        rouge=rouge-1
+        pix=(col, ligne)
+        couleur = (rouge,vert,0)
+        img.putpixel(pix, couleur)
+
+
+
+def cbton1(val):
+    """
+    courbe tonale1.
+    """
+    return val
+
+
+
+
+import matplotlib.pyplot as plt
+
+def trace_courbe_tonale(fct):
+    X = [x for x in range(256)]
+    Y = [fct(x) for x in range(256)]
+
+    plt.grid()
+    plt.xlabel('Valeurs initiales')
+    plt.ylabel('Valeurs modifiées')
+    plt.xlim([0,255])
+    plt.ylim([0,255])
+    plt.title('Courbe tonale')
+    plt.plot(X,Y)
+    plt.show()
+
+
+
+def cbton2(val):
+    """
+    courbe tonale2
+    """
+    max(val,250)
+    return val+50
+
+
+trace_courbe_tonale(cbton2)

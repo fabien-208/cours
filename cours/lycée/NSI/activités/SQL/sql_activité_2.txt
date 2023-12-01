@@ -1,0 +1,82 @@
+QUESTION 1
+
+SELECT nom, annéeNaiss from artiste
+WHERE annéeNaiss<= 1950;
+
+------------------------------------------------------------------------------------------
+
+QUESTION 2
+
+SELECT titre from film
+where genre = "Drame";
+
+------------------------------------------------------------------------------------------
+
+QUESTION 3
+
+SELECT nomRôle FROM rôle
+WHERE idActeur = 62;
+
+------------------------------------------------------------------------------------------
+
+QUESTION 4
+
+SELECT artiste.nom, artiste.prénom FROM film 
+JOIN artiste ON film.idRéalisateur = artiste.idArtiste WHERE titre = 'Memento';
+
+------------------------------------------------------------------------------------------
+
+QUESTION 5
+
+SELECT note FROM notation 
+WHERE idFilm = (SELECT idFilm FROM film WHERE titre = 'la guerre des étoiles');
+
+------------------------------------------------------------------------------------------
+
+QUESTION 6
+
+SELECT artiste.nom, artiste.prénom FROM rôle JOIN artiste 
+ON rôle.idActeur = artiste.idArtiste WHERE nomRôle = 'Chewbacca';
+
+------------------------------------------------------------------------------------------
+
+QUESTION 7
+
+SELECT f1.titre, nomRôle, nom, prénom FROM  rôle as r , film as f1, film as f2, artiste as a 
+WHERE f1.idfilm = r.idFilm AND f2.idRéalisateur = a.idArtiste AND r.idActeur = a.idArtiste;
+
+------------------------------------------------------------------------------------------
+
+QUESTION 8
+
+SELECT DISTINCT f1.titre, nomRôle, nom, prénom FROM  rôle as r , film as f1, film as f2, artiste as a 
+WHERE f1.idfilm = r.idFilm AND f2.idRéalisateur = a.idArtiste AND r.idActeur = a.idArtiste;
+
+------------------------------------------------------------------------------------------
+
+QUESTION 9 
+
+SELECT DISTINCT nom, prénom FROM Rôle JOIN artiste
+WHERE idArtiste NOT IN(SELECT idRéalisateur FROM Film);
+
+------------------------------------------------------------------------------------------
+
+QUESTION 10
+
+SELECT avg(note) FROM notation
+
+------------------------------------------------------------------------------------------
+
+QUESTION 11
+
+SELECT artiste.nom, artiste.prénom, count(film.idRéalisateur = artiste.idArtiste) FROM film JOIN artiste 
+ON film.idRéalisateur = artiste.idArtiste GROUP BY artiste.idArtiste
+
+------------------------------------------------------------------------------------------
+
+QUESTION 12
+
+SELECT artiste.nom, artiste.prénom FROM film JOIN artiste
+ON film.idRéalisateur = artiste.idArtiste GROUP BY artiste.idArtiste HAVING COUNT( film.idRéalisateur = artiste.idArtiste)>=2;
+
+------------------------------------------------------------------------------------------

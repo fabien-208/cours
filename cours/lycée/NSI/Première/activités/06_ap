@@ -1,0 +1,39 @@
+# Créé par 1SI, le 10/01/2022 en Python 3.7
+
+#exercice 1
+
+article = {'réference': 31654, 'designation' : 'Souris', 'prix': 30.25}
+
+print(article)
+
+
+#exercie 2
+
+def echange(dict):
+    """
+    programme qui change les clés et les valeurs d'un dictionnaire
+    """
+    nouveau_dict={}
+    for cle, valeur in dict.items():
+        nouveau_dict[valeur]=cle
+    print(nouveau_dict)
+
+
+
+
+#exercice 3
+
+def copier(E):
+    """
+    permet de copier un dictionnaire
+    """
+    new_dict= {}
+    new_dict=E.copy()
+    del new_dict['prix']
+    print(new_dict)
+    print(E)
+
+
+
+
+echange(article)

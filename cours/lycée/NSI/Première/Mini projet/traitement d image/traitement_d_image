@@ -1,0 +1,97 @@
+title: Manipulation d'image avec Python - Partie 1
+
+from PIL import Image
+
+
+def mystere(img):
+	"""
+	traitement mystere sur une image
+	"""
+	(width, height) = img.size
+	for col in range(width):
+		for ligne in range(height):
+			pix = (col, ligne)
+			couleur = img.getpixel(pix)
+			inverse = 255 - couleur
+			img.putpixel(pix, inverse)
+	
+def vrai_nb(img, seuil):
+	"""
+	transforme une image en vrai noir et blanc
+	
+	si la valeur du pixel > seuil -> blanc
+	si la valeur du pixel <= seuil -> noir
+	"""
+	(width, height) = img.size
+	for col in range(width):
+		for ligne in range(height):
+			pix= (col, ligne)
+			couleur= img.getpixel(pix)
+			if couleur > seuil:
+				couleur = 255
+				img.putpixel(pix, couleur)
+			elif couleur<= seuil:
+				couleur = 0
+				img.putpixel(pix, couleur)
+
+
+
+
+def mystere_img(img):
+	"""
+	traitement mystère sur une image
+	"""
+	(width, height) = img.size
+	for col in range(width):
+		for ligne in range(height):
+			pix = (col, ligne)
+			couleur = img.getpixel(pix)
+			inverse = 255 - couleur
+			img.putpixel(pix, inverse)
+			
+def quadrillage1(img):
+    """
+    mets un pixel blanc sur tout les multiple de 50
+    """
+    (width, height)= img.size
+    for col in range(0,width,50):
+        for ligne in range(0,height,50):
+            pix= (col, ligne)
+            couleur= img.getpixel(pix)
+            couleur= 255
+            blanc= couleur
+            img.putpixel(pix, blanc)
+
+			
+def quadrillage2(img):
+    """
+    mets un pixel blanc sur tout les multiple de 50
+    """
+
+    (width, height)= img.size
+    col=width
+    ligne=height
+    if width %50:
+        if height %50:
+            pix=(col, ligne)
+            couleur= img.getpixel(pix)
+            couleur = 255
+            blanc= couleur
+            img.putpixel(pix, blanc)
+
+
+img=Image.open("nb.png")
+img.show(quadrillage1(img))
+
+			
+img = Image.open("nb.png")			
+print("taille de l'image:")
+print(img.size)
+print('image avant traitement:')
+img.show()
+print('traitement en cours ...')
+mystere_img(img)
+print('image après traitement:')
+img.show()
+
+

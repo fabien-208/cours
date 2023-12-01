@@ -1,0 +1,36 @@
+2.2
+
+1)
+Ochon
+Sud
+
+2)
+324711230
+325711230
+
+3)
+Ochon	Paul
+Ochon	Eric
+Gross	Jean
+Camé	Léon
+Darc	Jeanne
+Sud	Paul
+
+4)
+Ochon	Paul
+Ochon	Eric
+Gross	Jean
+Camé	Léon
+Darc	Jeanne
+Sud	Paul
+
+5)
+Ochon	Paul
+Ochon	Eric
+
+6)
+8
+
+7)
+Sapin	Noëlle
+Fonfec	Sophie

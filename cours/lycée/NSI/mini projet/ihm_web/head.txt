@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html class="" lang="FR">
+    <head>
+        <meta charset="utf-8">
+        <title>ihm_web_exemple</title>
+        <link rel="stylesheet" href="ihm.css" />
+    </head>

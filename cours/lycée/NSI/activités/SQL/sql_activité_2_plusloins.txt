@@ -1,0 +1,50 @@
+QUESTION 1 
+
+SELECT film.titre, rôle.nomRôle FROM rôle JOIN artiste
+ON rôle.idActeur == artiste.idArtiste JOIN film ON rôle.idFilm == film.idFilm 
+WHERE artiste.nom = 'Allen' and artiste.prénom = 'Woody';
+
+------------------------------------------------------------------------------------------
+
+QUESTION 2 
+
+SELECT DISTINCT artiste.nom, artiste.prénom, film.titre FROM artiste JOIN film
+ON film.idRéalisateur = artiste.idArtiste
+WHERE film.idRéalisateur IN (SELECT rôle.idActeur FROM rôle 
+WHERE rôle.idFilm = film.idFilm);
+
+------------------------------------------------------------------------------------------
+
+QUESTION 3
+
+SELECT DISTINCT film.titre FROM film JOIN artiste
+ON film.idRéalisateur = artiste.idArtiste
+WHERE film.idRéalisateur NOT IN (SELECT rôle.idActeur FROM rôle WHERE rôle.idFilm = film.idFilm) AND artiste.prénom= 'Quentin' AND artiste.nom = 'Tarantino';
+
+------------------------------------------------------------------------------------------
+
+QUESTION 4
+
+SELECT DISTINCT film.titre FROM film JOIN artiste
+ON film.idRéalisateur = artiste.idArtiste
+WHERE artiste.nom = 'Hitchcock' AND (SELECT idArtiste FROM artiste
+WHERE artiste.nom = 'Stewart' AND artiste.prénom = 'James') NOT IN (SELECT rôle.idActeur FROM rôle 
+WHERE rôle.idfilm == film.idFilm);
+
+------------------------------------------------------------------------------------------
+
+QUESTION 5 
+
+SELECT avg(note) FROM notation 
+WHERE idfilm = (SELECT idFilm FROM film
+WHERE titre = 'La Guerre des étoiles');
+
+------------------------------------------------------------------------------------------
+
+QUESTION 6
+
+SELECT film.titre FROM film 
+GROUP BY film.titre HAVING count((SELECT rôle.idFilm FROM rôle
+WHERE rôle.idFilm = film.idFilm)) = 0;
+
+------------------------------------------------------------------------------------------

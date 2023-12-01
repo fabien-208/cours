@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Convertisseur de températures</title>
+    <style type="text/css">
+        html {
+            margin: 2px;
+            background-color: Blue;
+        }
+        body {
+            background-color: silver;
+        }
+        h1 {
+            background-color: red;
+            border: 2px solid red;
+            text-align : center;
+        }
+        div {
+            border: 2px dashed green;
+            margin: 2px;
+            text-align: center;
+        }
+        
+
+    </style>
+</head>
+<body>
+<h1>Convertisseur de températures</h1>
+<div id="page">
+    <div id="saisie"><h2>Zone de saisie</h2>
+        <input type="text" id="entree" size="5">
+        <input type="button" id="bouton" value="Conversion">
+    </div>
+    <div id="resultats">
+        <h2>Zone de résultats</h2>
+        <div class="conversion">
+            <h3>En Kelvin</h3>
+            <span id="rep_K"></span>
+			<h4> En Fahrenheit</h4>
+			<span id="rep_F"></span>
+		</div>
+    </div>
+</div>
+
+<script>
+    console.log('Page chargée');
+    function click_bouton() {
+        conv_K2C(saisie.value) ;
+		conv_K2F(saisie.value) ;
+	}
+	document.getElementById('entree')
+	saisie = document.getElementById('entree')
+	saisie.value
+    bouton = document.getElementById('bouton');
+    bouton.addEventListener("click",click_bouton);
+    function conv_K2C(t) {
+        t-=273.15
+		t+="K"
+		reponse = document.getElementById('rep_K')
+		reponse.innerHTML = (t) ;	
+	}
+	function conv_K2F(t) {
+        t = (t-273.15) * 9/5 + 32
+		t+="°F"
+		reponse = document.getElementById('rep_F')
+		reponse.innerHTML = (t) ;	
+	}
+	function affiche_resultat(valeur,unite) {
+		var nv_div = document.createElement("div");
+  
+		var texte_unite = document.createElement("h3");
+		texte_unite.innerHTML = unite;
+  
+		var texte_valeur = document.createElement("span");
+		texte_valeur.innerHTML = valeur.toFixed(2);
+  
+		nv_div.appendChild(texte_unite);
+		nv_div.appendChild(texte_valeur);
+  
+		var div_pere = document.getElementById("resultats");
+		div_pere.appendChild(nv_div);
+	}
+
+	
+</script>
+</body>
+</html>

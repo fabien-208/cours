@@ -1,0 +1,39 @@
+from microbit import *
+x=0
+y=0
+for i in range(0,4):
+    display.set_pixel(x,y,9)
+    x=x+1
+for a in range(0,4):
+    display.set_pixel(x,y,9)
+    y=y+1
+for z in range(0,4):
+    display.set_pixel(x,y,9)
+    x=x-1
+for e in range(0,4):
+    display.set_pixel(x,y,9)
+    y=y-1
+sleep(100)
+for i in range(0,4):
+    display.set_pixel(x,y,0)
+    x=x+1
+for a in range(0,4):
+    display.set_pixel(x,y,0)
+    y=y+1
+for z in range(0,4):
+    display.set_pixel(x,y,0)
+    x=x-1
+for e in range(0,4):
+    display.set_pixel(x,y,0)
+    y=y-1
+sleep(250)
+x=1
+y=1
+for r in range(0,3):
+    display.set_pixel(x,y,9)
+    x=x+1
+for t in range(0,3):
+    display.set_pixel(x,y,9)
+    y=y+1
+fro y in range(0,3):
+    display.set_pixel(x

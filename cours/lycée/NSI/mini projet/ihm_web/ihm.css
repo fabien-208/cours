@@ -1,0 +1,16 @@
+th{
+    background-color: aqua;
+    font-size:xx-large;   
+}
+
+body {
+    background-color: silver;
+}
+table, td, th{
+    border: 1px solid black;
+    text-align: center;
+}
+
+.gray{
+    background-color: white;
+}

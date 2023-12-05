@@ -1,23 +1,23 @@
 
 import pygame
 import couleur
+import nuage
 
 
 def init():
     return {}
 
 
-def update():
-    pass
-
+def met_a_jour(scene):
+    nuage.met_a_jour(scene['nuage'])
 
 def dessine(surface, scenario):
     dessine_ciel(surface)
     dessine_soleil(surface)
     dessine_montagne(surface)
     dessine_sol(surface)
-    dessine_nuage(surface)
     dessine_arbre(surface, 100, 600)
+    nuage.dessine_nuage(surface, scenario['nuage'])
     
     
     
@@ -48,19 +48,7 @@ def dessine_sol(surface):
 def dessine_arbre(surface, X,Y):
     for i in range(4):
         pygame.draw.polygon(surface, couleur.vert_clair, ((X+0, Y+50), (X+20, Y+0), (X+40, Y+50)))
-        Y += 23o
+        Y += 23
         
         
-def dessine_nuage(surface):
-    coord = [[290, 140],[900, 220],[31, 357],[600,200],[460, 320]]
-    for elt in coord:    
-        pygame.draw.circle(surface,couleur.blanc,(elt[0],elt[1]),30)
-        pygame.draw.circle(surface,couleur.blanc,(elt[0]-20,elt[1]),20)
-        pygame.draw.circle(surface,couleur.blanc,(elt[0]+20,elt[1]),20)
-        pygame.draw.circle(surface,couleur.blanc,(elt[0],elt[1]-15),20)
-        pygame.draw.circle(surface,couleur.blanc,(elt[0],elt[1]+15),20)
-        
-        
-        
-def met_a_jour():
-    pass
+    

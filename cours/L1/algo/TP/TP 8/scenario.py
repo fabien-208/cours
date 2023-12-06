@@ -9,6 +9,7 @@ def init():
 
 
 def met_a_jour(scene):
+    scene['horloge'].tick(60)
     nuage.met_a_jour(scene['nuage'])
 
 def dessine(surface, scenario):
@@ -16,8 +17,9 @@ def dessine(surface, scenario):
     dessine_soleil(surface)
     dessine_montagne(surface)
     dessine_sol(surface)
-    dessine_arbre(surface, 100, 600)
+    dessine_arbre(surface)
     nuage.dessine_nuage(surface, scenario['nuage'])
+    met_a_jour(scenario)
     
     
     
@@ -45,10 +47,14 @@ def dessine_sol(surface):
     pygame.draw.rect(surface, couleur.blanc, [0, 650, 1000, 200], 0)
     
     
-def dessine_arbre(surface, X,Y):
-    for i in range(4):
-        pygame.draw.polygon(surface, couleur.vert_clair, ((X+0, Y+50), (X+20, Y+0), (X+40, Y+50)))
-        Y += 23
-        
+def dessine_arbre(surface):
+    arbre = [(87, 600), (739, 692), (234, 615), (567, 534), (344 , 569)] 
+    for e in range(5):
+        X = arbre[e][0]
+        Y = arbre[e][1]
+        for i in range(4):
+            pygame.draw.polygon(surface, couleur.vert_clair, ((X+0, Y+50), (X+20, Y+0), (X+40, Y+50)))
+            Y += 23
+            
         
     

@@ -6,7 +6,7 @@ import random
 
 def init():
     pygame.init()
-    surface = pygame.display.set_mode((1000, 800))
+    surface = pygame.display.set_mode((800, 800))
     pygame.display. set_caption ('montagne')
     horloge = pygame.time.Clock ()
     scen  = scenario.init()
@@ -20,15 +20,20 @@ def init():
     
 def boucle(scene):
     while scene['continuer'] :
-        for event in pygame.event.get():
             scenario.dessine(scene['surface'], scene)
-            if event.type == QUIT:
-                scene['continuer'] = False
             pygame.display.update()
+            quitte(scene)
     pygame.quit()
 
 
 
+def quitte(scene):
+    for event in pygame.event.get() :
+        if event.type == pygame.QUIT :
+            scene['continuer'] = False
+        if event.type == pygame.KEYDOWN :
+            if event.key == pygame.K_ESCAPE : 
+                scene['continuer'] = False
 
 
 

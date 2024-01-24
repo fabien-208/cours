@@ -1,6 +1,6 @@
 # Exerice 1
 
-def decomp_facteurs_premiers(nb: int) -> list[int]:
+def decomp_facteurs_premiers(nb):
     diviseur = 2
     nb_premier = []
     while nb != 1:
@@ -95,20 +95,15 @@ def meilleur_film(base):
 
 
 def ordonne(base):
-    duree = []
+
     liste = []
     for film in base:
-        duree.append(film[1])
-    sorted(duree)
-    print(duree)
-    
-    for i in range(len(duree)):
-        for film in base:
-            if duree[i] == film[1]:
-                liste.append(film)
-    return liste
-
-
+        liste.append((film['titre'], film['durée']))
+    for i in range(len(liste)):
+        for j in range(len(liste)):
+            if liste[i][1] > liste[j][1]:
+                liste[i], liste[j] = liste[j], liste[i]
+    return listes
         
     
 

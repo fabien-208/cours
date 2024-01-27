@@ -60,9 +60,7 @@ class voiture:
         if self.vitesse < 130:
             self.vitesse += inc
         
-            
-            
-            
+        
     def freine(self, dec):
         if dec >= self.vitesse:
             self.vitesse = 0

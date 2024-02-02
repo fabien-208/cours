@@ -129,14 +129,14 @@ class demineur:
             col = random.randint(0, self.__nb_colonne-1)
             lig = random.randint(0, self.__nb_ligne-1)
             self.plateau[col][lig][0] = ' *'
-            ##self.plateau[col-1][lig-1].incremente_valeur()
-            ##self.plateau[col-1][lig].incremente_valeur()
-            ##self.plateau[col-1][lig+1].incremente_valeur()
-            ##self.plateau[col][lig-1].incremente_valeur()
-            ##self.plateau[col][lig+1].incremente_valeur()
-            ##self.plateau[col+1][lig-1].incremente_valeur()
-            ##self.plateau[col+1][lig+1].incremente_valeur()
-            ##self.plateau[col+1][lig].incremente_valeur()
+            self.plateau[col-1][lig-1].incremente_valeur()
+            self.plateau[col-1][lig].incremente_valeur()
+            self.plateau[col-1][lig+1].incremente_valeur()
+            self.plateau[col][lig-1].incremente_valeur()
+            self.plateau[col][lig+1].incremente_valeur()
+            self.plateau[col+1][lig-1].incremente_valeur()
+            self.plateau[col+1][lig+1].incremente_valeur()
+            self.plateau[col+1][lig].incremente_valeur()
 
 
 

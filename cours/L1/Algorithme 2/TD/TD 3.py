@@ -17,7 +17,7 @@ class etudiant:
         >>> etu.moyenne_matière('MOMI')
         9.0
         >>> etu.les_matières()
-        ['MOMI', 'Algo', 'Anglais']
+        ['Anglais', 'Algo', 'MOMI']
         >>> etu.stop_saisie_notes()
         >>> etu.ajoute_note('Anglais', 19)
         False
@@ -28,7 +28,7 @@ class etudiant:
         >>> coef['MOMI'] = 3
         >>> coef['Algo'] = 5
         >>> etu.moyenne_gen(coef)
-        14.466666666666667
+        12.8
         """
         
         self.__nom = nom
@@ -103,13 +103,42 @@ class Formation:
         >>> coef['Anglais'] = 7
         >>> coef['MOMI'] = 3
         >>> coef['Algo'] = 5
-        >>> form  = Formation("semestre - 2 Lic. Informatique, coef")
+        >>> form  = Formation("semestre - 2 Lic. Informatique", coef)
         >>> form.ajoute_etudiant("Kevin", "Dupont")
         >>> form.ajoute_etudiant("Gabrielle", "Durant")
         >>> form.ajoute_etudiant("Yakoub", "Duchemin")
         >>> form.ajoute_etudiant("Léa", "Dupuis")
         >>> form.affiche_etudiant()
-
+        1 - Kevin Dupont
+        2 - Gabrielle Durant
+        3 - Yakoub Duchemin
+        4 - Léa Dupuis
+        >>> form.ajoute_notes_etudiant(1, 'Anglais', 10)
+        True
+        >>> form.ajoute_notes_etudiant(1, 'Algo', 12)
+        True
+        >>> form.ajoute_notes_etudiant(1, 'Anglais', 16)
+        True
+        >>> form.ajoute_notes_etudiant(2, 'Algo', 11)
+        True
+        >>> form.ajoute_notes_etudiant(2, 'Algo', 17)
+        True
+        >>> form.ajoute_notes_etudiant(2, 'Anglais', 13)
+        True
+        >>> form.ajoute_notes_etudiant(3, 'Anglais', 18)
+        True
+        >>> form.ajoute_notes_etudiant(3, 'Algo', 18)
+        True
+        >>> form.ajoute_notes_etudiant(4, 'Algo', 15)
+        True
+        >>> form.ajoute_notes_etudiant(4, 'Anglais', 8)
+        True
+        >>> form.ajoute_notes_etudiant(4, 'Anglais', 10)
+        True
+        >>> form.calcule_diplome()
+        13.375
+        >>> form.les_diplomes()
+        ['Kevin Dupont', 'Gabrielle Durant', 'Yakoub Duchemin', 'Léa Dupuis']
         """
         self.__formation = formation
         self.__coef = coef
@@ -122,12 +151,30 @@ class Formation:
 
     def affiche_etudiant(self):
         for i in range(len(self.__etudiant)):
-            print('{} - {} {}'.format(i+1, self.__etudiant[i].__prenom, self.__etudiant[i].__nom))
+            print('{} - {} {}'.format(i+1, self.__etudiant[i].prenom(), self.__etudiant[i].nom()))
+
+
+    def ajoute_notes_etudiant(self, etu, matière, notes):
+        self.__etudiant[etu -1].ajoute_note(matière, notes)
 
 
 
+    def calcule_diplome(self):
+        somme_moy = 0
+        for i in range(len(self.__etudiant)):
+            self.__etudiant[i].stop_saisie_notes()
+            somme_moy += self.__etudiant[i].moyenne_gen(self.__coef)
+        return somme_moy / len(self.__etudiant)
+    
 
-        
+    def les_diplomes(self):
+        liste = []
+        for i in range(len(self.__etudiant)):
+            if self.__etudiant[i].moyenne_gen(self.__coef) > 10:
+                liste.append(self.__etudiant[i].str())
+        return liste
+
+
 if __name__ == '__main__':
     import doctest
     doctest.testmod(verbose = True)

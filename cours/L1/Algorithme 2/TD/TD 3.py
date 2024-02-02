@@ -85,7 +85,7 @@ class etudiant:
     def moyenne_gen(self, coef):
         somme = 0
         co = 0
-        for k, v in self.__notes.items():
+        for k in self.__notes.keys():
             somme += self.moyenne_matière(k) * coef[k]
             co += coef[k]
         return somme / co
@@ -137,6 +137,8 @@ class Formation:
         True
         >>> form.calcule_diplome()
         13.375
+        >>> form.ajoute_notes_etudiant(4, 'Anglais', 10)
+        False
         >>> form.les_diplomes()
         ['Kevin Dupont', 'Gabrielle Durant', 'Yakoub Duchemin', 'Léa Dupuis']
         """

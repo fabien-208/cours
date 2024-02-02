@@ -93,8 +93,6 @@ class etudiant:
 
 
 
-
-
 class Formation:
 
     def __init__(self, formation, coef) -> None:

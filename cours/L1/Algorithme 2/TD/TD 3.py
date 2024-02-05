@@ -1,7 +1,7 @@
 
 class etudiant:
     
-    def __init__(self, prenom, nom,formation, notes={}, diplome = False, saisie = True):
+    def __init__(self, prenom: str, nom: str,formation: str, notes={}, diplome: bool = False, saisie: bool = True) -> None:
         """
         >>> etu = etudiant('fanny', 'bravo','info')
         >>> etu.ajoute_note('MOMI', 9)
@@ -39,26 +39,26 @@ class etudiant:
         self.__saisie = saisie
         
         
-    def nom(self):
+    def nom(self)-> str:
         return self.__nom
     
-    def prenom(self):
+    def prenom(self)-> str:
         return self.__prenom
     
-    def diplome(self):
+    def diplome(self) -> bool:
         return self.__diplome
     
     
-    def ajoute_note(self, matière, note):
+    def ajoute_note(self, matière: str, note: int)-> bool:
         if self.__saisie == True:
             if matière not in self.__notes:
                 self.__notes[matière] = []
             self.__notes[matière].append(note)
-            print(True)
+            return True
         else:
-            print(False)
+             return False
         
-    def moyenne_matière(self, matière):
+    def moyenne_matière(self, matière: str)-> float:
         
         somme = 0
         for note in self.__notes[matière]:
@@ -67,22 +67,22 @@ class etudiant:
         
         
         
-    def les_matières(self):
+    def les_matières(self)->list[str]:
         liste = []
         for elt in self.__notes.keys():
             liste.append(elt)
         return liste
 
     
-    def stop_saisie_notes(self):
+    def stop_saisie_notes(self)-> None:
         self.__saisie = False
 
 
-    def str(self):
+    def str(self)-> str:
         return '{} {}'.format(self.__prenom, self.__nom)
     
 
-    def moyenne_gen(self, coef):
+    def moyenne_gen(self, coef:dict)-> float:
         somme = 0
         co = 0
         for k in self.__notes.keys():
@@ -95,7 +95,7 @@ class etudiant:
 
 class Formation:
 
-    def __init__(self, formation, coef) -> None:
+    def __init__(self, formation:str, coef:dict) -> None:
         """
         >>> coef = {}
         >>> coef['Anglais'] = 7
@@ -145,7 +145,7 @@ class Formation:
         self.__etudiant = []
 
 
-    def ajoute_etudiant(self, prenom, nom):
+    def ajoute_etudiant(self, prenom: str, nom:str)-> None:
         self.__etudiant.append(etudiant(prenom, nom, self.__formation))
 
 

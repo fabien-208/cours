@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercice 2</title>
+    <style>
+        td, th, tr, table{
+            border: 1px solid;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <caption>table de véritedu OU exclusif</caption>
+        <tbody>
+            <tr>
+                <th>A</th>
+                <th>B</th>
+                <th>A XOR B</th>
+            </tr>
+            <tr>
+                <td>VRAI</td>
+                <td>VRAI</td>
+                <td>VRAI</td>
+            </tr>
+            <tr>
+                <td>VRAI</td>
+                <td>FAUX</td>
+                <td>FAUX</td>
+            </tr>
+            <tr>
+                <td>FAUX</td>
+                <td>VRAI</td>
+                <td>FAUX</td>
+            </tr>
+            <tr>
+                <td>FAUX</td>
+                <td>FAUX</td>
+                <td>FAUX</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <caption>Table de multiplication</caption>
+        <tbody>
+            <tr>
+                <th>X</th>
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+            </tr>
+            <tr>
+                <th>1</th>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+                <td>4</td>
+                <td>5</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>2</td>
+                <td>4</td>
+                <td>6</td>
+                <td>8</td>
+                <td>10</td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>3</td>
+                <td>6</td>
+                <td>9</td>
+                <td>12</td>
+                <td>15</td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td>4</td>
+                <td>8</td>
+                <td>12</td>
+                <td>16</td>
+                <td>20</td>
+            </tr>
+            <tr>
+                <th>5</th>
+                <td>5</td>
+                <td>10</td>
+                <td>15</td>
+                <td>20</td>
+                <td>25</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>La population du Benelux</caption>
+        <tbody>
+        <tr>
+            <th scope="row">Pays</th>
+            <th scope="row">Population</th>
+        </tr>
+        <tr>
+            <td>Belgique</td>
+            <td>11.071.483</td>
+        </tr>
+        <tr>
+            <td>Pays-Bas</td>
+            <td>16.847.007</td>
+        </tr>
+        <tr>
+            <td>Luxembourg</td>
+            <td>503.302</td>
+        </tr>
+        <tr>
+            <th scope="col">Total</th>
+            <td>28.421.792</td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>les nombres</caption>
+        <tbody>
+            <tr>
+                <th colspan="3">nombre de 1 a 3</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>2</td>
+                <td>3</td>
+            </tr>
+            <tr>
+                <th colspan="3">nombre de 4 a 6</th>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>5</td>
+                <td>6</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>les notes</caption>
+        <tbody>
+        <tr>
+            <th></th>
+            <th>CC</th>
+            <th>TP</th>
+        </tr>
+        <tr>
+            <td rowspan="2">notes</td>
+            <td>10</td>
+            <td>15</td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>13</td>
+        </tr>
+        <tr>
+            <td>moy</td>
+            <td>9</td>
+            <td>14</td>
+        </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>les ventes de chausettes</caption>
+        <tbody>
+            <tr>
+                <th rowspan="2">ventes de chausettes</th>
+                <th colspan="2">annee 2020/2021</th>
+            </tr>
+            <tr>
+                <td>printemps/été</td>
+                <td>automne/hiver</td>
+            </tr>
+            <tr>
+                <th scope="row"> rouges:</th>
+                <td>55</td>
+                <td>310</td>
+            </tr>
+            <tr>
+                <th scope="row"> vertes</th>
+                <td>250</td>
+                <td>540</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>tableau de l'affluance moyennedes club de football</caption>
+        <tbody>
+            <tr>
+                <th>Club</th>
+                <th>annee</th>
+                <th>affluence moyenne</th>
+            </tr>
+            <tr>
+                <th rowspan="2">Lens</th>
+                <td>2014-2015</td>
+                <td>17205</td>
+            </tr>
+            <tr>
+                <td>2013-2014</td>
+                <td>31016</td>
+            </tr>
+            <tr>
+                <th rowspan="2">Lille</th>
+                <td>2014-2015</td>
+                <td>36547</td>
+            </tr>
+            <tr>
+                <td>2013-2014</td>
+                <td>38662</td>
+            </tr>
+            <tr>
+                <th rowspan="2">Valenciennes</th>
+                <td>2014-2015</td>
+                <td>8127</td>
+            </tr>
+            <tr>
+                <td>2013-2014</td>
+                <td>14354</td>
+            </tr>
+            <tr>
+                <th>Club</th>
+                <th>annee</th>
+                <th>affluence moyenne</th>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <caption>tableau piégé</caption>
+        <tbody>
+            <tr>
+                <td colspan="9">titre</td>
+            </tr>
+            <tr>
+                <td rowspan="4">coté gauche</td>
+                <td rowspan="2">1</td>
+                <td colspan="2">a</td>
+                <td colspan="2">b</td>
+                <td colspan="2">c</td>
+                <td rowspan="4">coté droit</td>
+            </tr>
+            <tr>
+                <td>d</td>
+                <td>e</td>
+                <td>f</td>
+                <td>g</td>
+                <td>h</td>
+                <td>i</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td colspan="3" rowspan="2"> gauche</td>
+                <td colspan="3" rowspan="2"> droite</td>
+            </tr>
+            <tr>
+                <td>3</td>
+            </tr>
+            <tr>
+                <td colspan="9">titre du bas</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

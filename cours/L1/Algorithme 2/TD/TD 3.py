@@ -122,6 +122,8 @@ class Formation:
         >>> form.ajoute_notes_etudiant(4, 'Algo', 15)
         >>> form.ajoute_notes_etudiant(4, 'Anglais', 8)
         >>> form.ajoute_notes_etudiant(4, 'Anglais', 10)
+        >>> form.__str__()
+        '(semestre - 2 Lic. Informatique, 4)'
         >>> form.calcule_diplome()
         13.375
         >>> form.les_diplomes()
@@ -131,11 +133,16 @@ class Formation:
         self.__coef = coef
         self.__etudiant = []
 
+    def __str__(self) -> str:
+        return '({}, {})'.format(self.__formation, len(self.__etudiant))
 
     def ajoute_etudiant(self, prenom: str, nom:str)-> None:
         self.__etudiant.append(etudiant(prenom, nom, self.__formation))
 
 
+    def affiche_formation(self):
+        return self.__str__
+    
     def affiche_etudiant(self):
         for i in range(len(self.__etudiant)):
             print('{} - {} {}'.format(i+1, self.__etudiant[i].prenom(), self.__etudiant[i].nom()))
@@ -154,7 +161,7 @@ class Formation:
         return somme_moy / len(self.__etudiant)
     
 
-    def les_diplomes(self):
+    def les_diplomes(self)->list[str]:
         liste = []
         for i in range(len(self.__etudiant)):
             if self.__etudiant[i].moyenne_gen(self.__coef) > 10:

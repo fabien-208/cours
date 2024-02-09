@@ -185,25 +185,25 @@ class demineur:
         """
         if not self.plateau[l][c].est_visible() == False:
             self.plateau[l][c].montre_toi()
-        if self.plateau[l][c].est_bombe() == 'la case est une bombe':
-            print("Boum!!")
-        elif self.plateau[l][c].est_vide() == 'la case est vide' :
-            if c > 0 :
-                self.montre_case(l,c-1)
+            if self.plateau[l][c].est_bombe() == 'la case est une bombe':
+                print("Boum!!")
+            elif self.plateau[l][c].est_vide() == 'la case est vide' :
+                if c > 0 :
+                    self.montre_case(l,c-1)
+                    if l > 0 :
+                        self.montre_case(l-1,c-1)
+                    if l < self.__nb_ligne-1 :
+                        self.montre_case(l+1,c-1)
+                if c < self.__nb_colonne-1 :
+                    self.montre_case(l,c+1)
+                    if l > 0 :
+                        self.montre_case(l-1,c+1)
+                    if l < self.__nb_ligne-1 :
+                        self.montre_case(l+1,c+1)
                 if l > 0 :
-                    self.montre_case(l-1,c-1)
+                    self.montre_case(l-1,c)
                 if l < self.__nb_ligne-1 :
-                    self.montre_case(l+1,c-1)
-            if c < self.__nb_colonne-1 :
-                self.montre_case(l,c+1)
-                if l > 0 :
-                    self.montre_case(l-1,c+1)
-                if l < self.__nb_ligne-1 :
-                    self.montre_case(l+1,c+1)
-            if l > 0 :
-                self.montre_case(l-1,c)
-            if l < self.__nb_ligne-1 :
-                self.montre_case(l+1,c)
+                    self.montre_case(l+1,c)
 
 
 

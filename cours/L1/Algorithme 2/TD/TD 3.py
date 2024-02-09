@@ -141,7 +141,7 @@ class Formation:
 
 
     def affiche_formation(self):
-        return self.__str__
+        print(self.__str__())
     
     def affiche_etudiant(self):
         for i in range(len(self.__etudiant)):

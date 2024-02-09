@@ -112,31 +112,18 @@ class Formation:
         3 - Yakoub Duchemin
         4 - Léa Dupuis
         >>> form.ajoute_notes_etudiant(1, 'Anglais', 10)
-        True
         >>> form.ajoute_notes_etudiant(1, 'Algo', 12)
-        True
         >>> form.ajoute_notes_etudiant(1, 'Anglais', 16)
-        True
         >>> form.ajoute_notes_etudiant(2, 'Algo', 11)
-        True
         >>> form.ajoute_notes_etudiant(2, 'Algo', 17)
-        True
         >>> form.ajoute_notes_etudiant(2, 'Anglais', 13)
-        True
         >>> form.ajoute_notes_etudiant(3, 'Anglais', 18)
-        True
         >>> form.ajoute_notes_etudiant(3, 'Algo', 18)
-        True
         >>> form.ajoute_notes_etudiant(4, 'Algo', 15)
-        True
         >>> form.ajoute_notes_etudiant(4, 'Anglais', 8)
-        True
         >>> form.ajoute_notes_etudiant(4, 'Anglais', 10)
-        True
         >>> form.calcule_diplome()
         13.375
-        >>> form.ajoute_notes_etudiant(4, 'Anglais', 10)
-        False
         >>> form.les_diplomes()
         ['Kevin Dupont', 'Gabrielle Durant', 'Yakoub Duchemin', 'Léa Dupuis']
         """

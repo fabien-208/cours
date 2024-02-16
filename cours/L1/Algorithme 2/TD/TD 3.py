@@ -21,12 +21,12 @@ class etudiant:
         >>> etu.stop_saisie_notes()
         >>> etu.ajoute_note('Anglais', 19)
         False
-        >>> etu.str()
-        'fanny bravo'
+        >>> etu.__str__()
+        ('fanny', 'bravo')
         >>> coef = {}
-        >>> coef['Anglais'] = 7
-        >>> coef['MOMI'] = 3
-        >>> coef['Algo'] = 5
+        >>> coef['Anglais'] = 3
+        >>> coef['MOMI'] = 5
+        >>> coef['Algo'] = 7
         >>> etu.moyenne_gen(coef)
         12.8
         """
@@ -78,8 +78,8 @@ class etudiant:
         self.__saisie = False
 
 
-    def str(self)-> str:
-        return '{} {}'.format(self.__prenom, self.__nom)
+    def __str__(self)-> tuple:
+        return (self.__prenom, self.__nom)
     
 
     def moyenne_gen(self, coef:dict)-> float:
@@ -98,9 +98,8 @@ class Formation:
     def __init__(self, formation:str, coef:dict) -> None:
         """
         >>> coef = {}
-        >>> coef['Anglais'] = 7
-        >>> coef['MOMI'] = 3
-        >>> coef['Algo'] = 5
+        >>> coef['Anglais'] = 3
+        >>> coef['Algo'] = 7
         >>> form  = Formation("semestre - 2 Lic. Informatique", coef)
         >>> form.ajoute_etudiant("Kevin", "Dupont")
         >>> form.ajoute_etudiant("Gabrielle", "Durant")
@@ -127,7 +126,7 @@ class Formation:
         >>> form.calcule_diplome()
         13.375
         >>> form.les_diplomes()
-        ['Kevin Dupont', 'Gabrielle Durant', 'Yakoub Duchemin', 'Léa Dupuis']
+        [('Kevin', 'Dupont'), ('Gabrielle', 'Durant'), ('Yakoub', 'Duchemin'), ('Léa', 'Dupuis')]
         """
         self.__formation = formation
         self.__coef = coef
@@ -165,7 +164,7 @@ class Formation:
         liste = []
         for i in range(len(self.__etudiant)):
             if self.__etudiant[i].moyenne_gen(self.__coef) > 10:
-                liste.append(self.__etudiant[i].str())
+                liste.append(self.__etudiant[i].__str__())
         return liste
 
 

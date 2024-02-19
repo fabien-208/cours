@@ -3,13 +3,21 @@ class matrice:
 
     def __init__(self, mat:list[list[int]]) -> None:
         """
-        >>> bfrh = [[2, 4, 7],[6, 7, 2],[5, 6, 9]]
+        >>> bfrh = [[2, 4, 7],[6, 2],[5, 6, 9]]
         >>> tr = matrice(bfrh)
         >>> tr.__str__()
 
         """
-        self.__mat = mat
+        taille = 0
+        for i in range(len(mat)):
+            if len(mat[i]) > taille:
+                taille = len(mat[i])
 
+        for j in range(len(mat)):
+            if mat[j] != taille:
+                mat[j].append(0)
+
+        self.__mat = mat
     def __str__(self) -> None:
         for lis in self.__mat:
             mat = '| '
@@ -17,6 +25,26 @@ class matrice:
                 mat += '{} '.format(lis[i])
             mat += '|'
             print(mat) 
+
+    def nb_lignes(self) -> int:
+        return len(self.__mat)
+    
+    def nb_colonne(self) -> int:
+        return len(self.__mat[0])
+    
+
+
+    def est_matrice_carre(self) -> bool:
+        return self.nb_colonne() == self.nb_colonne()
+    
+    def est_mat_sym(self) ->bool:
+        if not(self.est_matrice_carre()):
+            return False
+        else:
+            for i in range(self.nb_lignes()):
+                for j in range(self.nb_colonne):
+                    pass
+
 
 
 if __name__ == "__main__":

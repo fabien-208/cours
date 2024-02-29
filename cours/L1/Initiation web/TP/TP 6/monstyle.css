@@ -1,0 +1,33 @@
+body{
+    background: #f0f0f0;
+}
+
+h1{
+    color: red; 
+    text-align: center;
+    font-family: sans-serif;
+    font: Arial; 
+    font-size: 20pt;
+}
+h2{
+    color: blue;
+    font-family: serif;
+    font: times; 
+    font-size: 14pt;
+    font-style: italic;
+    text-decoration: underline;
+}
+li{
+    list-style-type: square;      
+}
+a{
+    color: rgb(12, 154, 254);
+    font-size: 12pt;
+    text-decoration: underline;
+
+}
+a:hover{
+    color: rgb(123, 123, 123);
+    font-size: 12pt;
+    text-decoration: none;
+}

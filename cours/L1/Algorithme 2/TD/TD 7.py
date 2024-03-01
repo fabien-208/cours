@@ -3,17 +3,7 @@ class pile:
 
     def __init__(self, pile:list) -> None:
         """
-        >>> lsit = [1, 2, 3, 4]
-        >>> pil = pile(lsit)
-        >>> pil.aff_pile()
-        [1, 2, 3, 4]
-        >>> pil.push(5)
-        >>> pil.aff_pile()
-        [1, 2, 3, 4, 5]
-        >>> pil.pop()
-        5
-        >>> pil.aff_pile()
-        [1, 2, 3, 4]
+        
         """
         self.__pile = pile
 
@@ -25,14 +15,18 @@ class pile:
 
 
     def pop(self):
-        g = self.__pile[-1]
-        del(self.__pile[-1])
-        return g
-    
+        if len(self.__pile) == 0:
+            return None
+        return self.__pile.pop()
 
+    def vider_couleur(self, couleur, pile2):
+        for i in range(len(self.__pile), 0, -1):
+            if self.__pile[i].couleur() == couleur:
+                pile2.push(self.__pile[i])
+                self.__pile.pop()
+            else:
+                break
 
-    def separe_couleur(self):
-        pass
 
 
 

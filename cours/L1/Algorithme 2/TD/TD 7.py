@@ -18,14 +18,18 @@ class pile:
         if len(self.__pile) == 0:
             return None
         return self.__pile.pop()
+    
+    def __len__(self):
+        return len(self.__pile)
 
-    def vider_couleur(self, couleur, pile2):
-        for i in range(len(self.__pile), 0, -1):
-            if self.__pile[i].couleur() == couleur:
-                pile2.push(self.__pile[i])
-                self.__pile.pop()
-            else:
-                break
+
+def vider_couleur(pile, couleur, pile2):
+    for i in range(pile.__len__(), 0, -1):
+        if pile.__pile[i].couleur() == couleur:
+            pile2.push(pile.__pile[i])
+            pile.pop()
+        else:
+            break
 
 
 

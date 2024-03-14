@@ -1,0 +1,105 @@
+body{
+    background-image: url("C:/Users/fabie/Documents/images/fond.jpg");
+    background-color: white;
+    font-family: sans-serif;
+    width: 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 40px;
+    border-style: solid;
+    border-width: 2px;
+}
+
+h1{
+    font-size: 30pt;
+    text-align: center;
+    color: #191970;
+    letter-spacing: 10px;
+}
+
+h2{
+    font-size: 22pt;
+    color: #b0c4de;
+    letter-spacing: 3px;
+    text-decoration: underline;
+    margin-left: -20px;
+}
+
+h1::first-letter{
+    text-transform: uppercase;
+}
+
+h2::first-letter{
+    text-transform: uppercase;
+}
+
+p{
+    text-align: justify;
+}
+
+p::first-letter{
+    width: 150%;
+    font-weight: bold;
+    font-style: italic;
+
+}
+a{
+    color: #708090;
+}
+
+a:not(:visited), a:not(:active){
+    text-decoration: none;
+}
+
+a:hover{
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+li{
+    font-size: 15pt;
+    color: #4682b4;
+    list-style-type: upper-roman;
+}
+
+li:hover{
+    font-weight: bold;
+}
+
+li:visited{
+    text-decoration: none;
+}
+
+table, td{
+    border: dotted;
+    border-color: gray;
+    letter-spacing: 2px;
+}
+
+p#first-p{
+    font-style: italic;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#Formule{
+    text-align: center;
+    text-transform: capitalize;
+}
+a.return_somaire{
+    font-style: italic;
+    text-align: right;
+    color: #4682b4;
+    display: block;
+
+}
+
+p#der_phrase{
+    font-size: 120%;
+    font-style: italic;
+    font-variant: small-caps;
+    text-decoration: underline;
+    text-align: right;
+}

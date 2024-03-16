@@ -1,0 +1,6 @@
+body{
+    color: navy;
+}
+body:hover{
+    color: red;
+}

@@ -31,7 +31,56 @@ def vider_couleur(pile, couleur, pile2):
         else:
             break
 
+def separer_couleur_2(pile, pile2, pile3, pile4):
+    for i in range(pile.__len__(), 0, -1):
+        if pile[i].couleur == 'Coeur':
+            pile2.push(pile[i])
+            pile.pop()
+        if pile[i].couleur == 'Careaux':
+            pile3.push(pile[i])
+            pile.pop()
+        if pile[i].couleur == 'Pique':
+            pile4.push(pile[i])
+            pile.pop()
 
+        
+def separer_couleur(pile, pile2, pile3, pile4):
+    dic = {'trefle': pile(), 'careau' : pile3, 'Coeur' : pile2, 'Pique':pile4}
+    while(len(pile)) !=0:
+        carte = pile.pop()
+        dic[carte.couleur()].push(carte)
+    while(len(dic['trefle'])) != 0:
+        carte = dic['trefle'].pop()
+        pile.push(carte)
+    
+
+
+def vider_plus_petit(carte, pile, pile2):
+    while(len(pile)) != 0:
+        car = pile.pop()
+        if car.couleur == carte.couleur and car.hauteur > carte.hauteur:
+            pile.push(car)
+        else:
+            break
+
+
+
+def vider_plus_petit_2(carte, pile, pile2):
+    for i in range(pile.__len___(), 0, -1):
+        if pile[i].couleur == carte[0] and pile[i].hauteur > carte.hauteur:
+            pile2.push(pile[i])
+            pile.pop()
+        else:
+            break
+
+
+def trier(pile):
+    pile_min, mile_trier , pile_hb= pile(), pile(), pile()
+    while len(pile) !=0:
+        carte = pile.pop()
+        if carte.hauteur() < min:
+            pass
+        
 
 
 if "__main__" == __name__:

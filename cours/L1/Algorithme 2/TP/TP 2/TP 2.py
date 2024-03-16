@@ -97,8 +97,8 @@ class Carte:
         point = [0, 0, 0, 2, 3, 4, 10, 11]
         atout = [7, 8, 'Dame', 'Roi', 10, 'As', 9, 'Valet']
         point_atout = [0, 0, 0, 2, 3, 4, 14, 20]
-        ch_coul = random.randint(len(coul))
-        ch_haut = random.randint(len(hait))
+        ch_coul = random.randint(0,len(coul))
+        ch_haut = random.randint(0, len(haut))
         
         self.couleur = coul[ch_coul]
         self.hauteur = haut[ch_haut]

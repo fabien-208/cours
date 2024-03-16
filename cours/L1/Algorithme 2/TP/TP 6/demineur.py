@@ -261,23 +261,37 @@ class Demineur :
 class vuedemineur:
 
     def __init__(self) -> None:
-        dem = Demineur()
+        self.dem = Demineur()
         
-        fenetre = tkinter.Tk()
-        fenetre.title("Demineur")
-        img = tkinter.PhotoImage(file="C:/Users/fabie/OneDrive/Documents/cours/cours/L1/Algorithme 2/TP/TP 5/images_demineur/cache.gif")
-        btn_quit= tkinter.Button(fenetre , text = "Quitter" , command = quit)
-        btn_quit.grid()
-        btn_retry = tkinter.Button(fenetre, text='retry', command = vuedemineur)
-        btn_retry.grid()
-        for i in range(1, dem.lig()+1):
-            for j in range(1, dem.col()+1):
-                case = tkinter.IntVar()
-                can_image = tkinter.Button(fenetre, image=img)
-                can_image.grid(row=i, column=j, sticky='NSEW')
-        
-        fenetre.mainloop()
+        self.fenetre = tkinter.Tk()
+        self.fenetre.title("Demineur")
+        self.img = tkinter.PhotoImage(file="C:/Users/fabie/OneDrive/Documents/cours/cours/L1/Algorithme 2/TP/TP 5/images_demineur/cache.gif")
+        self.btn_quit= tkinter.Button(self.fenetre , text = "Quitter" , command = quit)
+        self.btn_quit.grid(row =self.dem.lig()+1, column= self.dem.col()//2+1, sticky= 'N')
+        self.btn_retry = tkinter.Button(self.fenetre, text='retry', command = self.cntrl_reinit)
+        self.btn_retry.grid(row =self.dem.lig()+1, column= self.dem.col()//2, sticky= 'S')
 
+        self.init_image()
+        self.fenetre.mainloop()
+
+
+    def init_image(self):
+        for i in range(1, self.dem.lig()+1):
+            for j in range(1, self.dem.col()+1):
+                case = tkinter.IntVar()
+                can_image = tkinter.Button(self.fenetre, image=self.img)
+                can_image.grid(row=i, column=j, sticky='NSEW')
+
+    def crer_cntrl_case(self, l, c):
+        if self.dem.est_cache(l, c):
+            pass
+        else:
+            val = self.dem.valeur(l, c)
+
+
+
+    def cntrl_reinit(self):
+        self.init_image()
 
 
 if '__main__' == __name__:

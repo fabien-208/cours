@@ -31,7 +31,8 @@ a{
 a:visited{
     color: brown;
 }
-td{
+th, table, td{
     text-align: right;
     border: 1px;
+    border-style: solid;
 }

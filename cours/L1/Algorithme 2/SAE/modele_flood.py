@@ -53,11 +53,12 @@ class Modele:
         self.__jeu = self.init_jeu()
 
     def init_jeu(self):
+        self.__score = 0
         plateau = []
         for i in range(self.__nb_colonne):
             lig = []
             for j in range(self.__nb_ligne):
-                lig.append(random.randint(0, self.__coul))
+                lig.append(random.randint(0, self.__coul-1))
             plateau.append(lig)
         return plateau
     

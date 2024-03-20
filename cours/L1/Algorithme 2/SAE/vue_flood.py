@@ -15,11 +15,11 @@ class Vue:
         btn_quitter = tkinter.Button(self.fenetre, 
                             text="Quit",
                             command = self.fenetre.destroy) 
-        btn_quitter.grid()
+        btn_quitter.grid(row= self.__modele.nb_lig()//2+1, column=self.__modele.nb_col()+1)
         btn_retry = tkinter.Button(self.fenetre,
                                    text = 'Retry',
                                    command= '')
-        btn_retry.grid()
+        btn_retry.grid(row= self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1)
         self.init_image()
         self.fenetre.mainloop()
 
@@ -27,8 +27,8 @@ class Vue:
             for i in range(1, self.__modele.nb_lig()+1):
                 for j in range(1, self.__modele.nb_col()+1):
                     case = tkinter.IntVar()
-                    can_image = tkinter.Button(self.fenetre, text='oui')
-                    can_image.grid(row=i, column=j, sticky='NSEW')
+                    can_image = tkinter.Button(self.fenetre, text=self.__modele.valeur_couleur(i-1, j-1))
+                    can_image.grid(row=i, column=j)
 
 
 if __name__ == '__main__' :

@@ -16,11 +16,7 @@ class VueSphere :
         fenetre = tkinter.Tk()
         fenetre.title("Sphere")
 
-        # on créé les images : elles sont mémorisées dans un objet PhotoImage
-        img = []
-        for i in range(1,9) :
-            img.append(tkinter.PhotoImage(file="sphere"+str(i)+".gif"))
-        # elles ont toutes les mêmes dimensions
+        # on créé les images : elles sont mémorisées dans un objet PhotoIma
         largeur = img[0].width()+1
         hauteur = img[0].height()
 

@@ -62,6 +62,10 @@ class Modele:
             plateau.append(lig)
         return plateau
     
+    
+    def score(self):
+        return self.__score
+    
     def nb_lig(self) -> int:
         return self.__nb_ligne
     

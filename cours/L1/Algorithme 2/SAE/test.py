@@ -1,7 +1,16 @@
-import tkinter 
+import vue_flood
+import modele_flood
 
-fenetre = tkinter.Tk()
-fenetre.title('tesst')
-image = tkinter.Canvas(fenetre, width=50, height=50)
-for k in range(5):
-    image.create_image(k, k+5, image='mine.gif')
+class controle:
+
+    def __init__(self, vue= vue_flood.Vue(), modele =modele_flood.Modele()) -> None:
+        self.vue = vue
+        self.modele = modele
+
+    def quit(self):
+        self.vue.fenetre.destroy
+
+    def retry(self):
+        self.modele.__score = 0
+        self.modele.init_jeu()
+        self.vue.init_image()

@@ -3,14 +3,25 @@ import modele_flood
 
 class controle:
 
-    def __init__(self, vue= vue_flood.Vue(), modele =modele_flood.Modele()) -> None:
-        self.vue = vue
-        self.modele = modele
+    def __init__(self, vue=None , modele=None) -> None:
+        
+
+        self.__cntrl = {'Retry' : True, 'Quit' : True}
+        self.__modele = modele_flood.Modele()
+        self.__vue = vue_flood.Vue(self.__modele, self.__cntrl)
 
     def quit(self):
-        self.vue.fenetre.destroy
+        self.__vue.fenetre.destroy
 
     def retry(self):
-        self.modele.__score = 0
-        self.modele.init_jeu()
-        self.vue.init_image()
+        self.__modele.reinit_jeu()
+        self.__vue.init_image()
+
+    def demarre(self):
+        while self.__cntrl['Quit'] == True and self.__cntrl['Retry'] ==True:
+            if self.__cntrl['Quit'] ==False:
+                self.quit()
+            if self.__cntrl['Retry'] == False:
+                self.retry()
+            else:
+                self.__vue.demarre()

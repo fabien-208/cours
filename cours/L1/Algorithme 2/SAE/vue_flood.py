@@ -17,7 +17,7 @@ class Vue:
                               fg="black")
           lbl_message.grid(row=self.__modele.nb_lig()//2-1, column= self.__modele.nb_col()+1)
     
-          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.__cntrl.['Quit'] = Fals)  # type: ignore
+          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.__cntrl['Quit'] = False)  # type: ignore
           
           btn_quitter.grid(row=self.__modele.nb_lig()//2 +1, column=self.__modele.nb_col()+1)
 

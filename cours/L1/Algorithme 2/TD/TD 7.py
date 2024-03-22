@@ -75,12 +75,16 @@ def vider_plus_petit_2(carte, pile, pile2):
 
 
 def trier(pile):
-    pile_min, mile_trier , pile_hb= pile(), pile(), pile()
-    while len(pile) !=0:
+    pile_min, mile_trier = pile(), pile()
+    while len(pile) != len(pile_min):
         carte = pile.pop()
-        if carte.hauteur() < min:
-            pass
-        
+        while len(pile) != 0:
+            car = pile.pop()
+            if car.est_plus_grand(carte):
+                carte, car = car, carte
+            pile_min.push(car)
+        mile_trier.push(carte)
+
 
 
 if "__main__" == __name__:

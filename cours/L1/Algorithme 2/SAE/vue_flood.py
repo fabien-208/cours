@@ -1,6 +1,7 @@
 
 import tkinter
-from traceback import print_tb
+import Flood_controleur
+
 
 class Vue:
 
@@ -17,11 +18,11 @@ class Vue:
                               fg="black")
           lbl_message.grid(row=self.__modele.nb_lig()//2-1, column= self.__modele.nb_col()+1)
     
-          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.__cntrl['Quit'] = False)  # type: ignore
+          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.__cntrl.quit())  # type: ignore
           
           btn_quitter.grid(row=self.__modele.nb_lig()//2 +1, column=self.__modele.nb_col()+1)
 
-          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl['Retry'] = False) # type: ignore
+          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl.retry()) # type: ignore
           
           btn_retry.grid(row=self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1)
           self.init_image()

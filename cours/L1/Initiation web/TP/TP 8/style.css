@@ -1,0 +1,19 @@
+table{
+    border-color: blue;
+    border-style: solid;
+    border-collapse: collapse;
+    
+}
+
+thead, tfoot{
+    background-image: url('C:/Users/pc-fabien/Favorites/Documents/cours-1/cours/L1/Initiation web/TP/TP 8/sky.jpg');
+}
+tbody th{
+    background-color: rgb(230, 230,230);
+}
+
+tbody{
+    border-color: aqua;
+    border-style: solid;
+    border: 1px;
+}

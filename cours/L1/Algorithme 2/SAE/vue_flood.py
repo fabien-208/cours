@@ -22,7 +22,7 @@ class Vue:
           
           btn_quitter.grid(row=self.__modele.nb_lig()//2 +1, column=self.__modele.nb_col()+1, padx=10)
 
-          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= None) # type: ignore
+          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl.retry()) # type: ignore
           
           btn_retry.grid(row=self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1, padx=10)
           self.init_image()

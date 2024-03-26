@@ -1,0 +1,12 @@
+body{
+    background-color: #DDDDDD;
+}
+h2#sommaire{
+    display: none;
+}
+nav  li{
+    color: black;
+    text-decoration: none;
+    display: block;
+    border-style: inset;
+}

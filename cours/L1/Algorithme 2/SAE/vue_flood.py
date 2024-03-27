@@ -18,21 +18,32 @@ class Vue:
                               fg="black")
           lbl_message.grid(row=self.__modele.nb_lig()//2-1, column= self.__modele.nb_col()+1)
     
+<<<<<<< HEAD
           btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.__cntrl(True, False))
+=======
+          btn_quitter = tkinter.Button(self.fenetre,text="Quit",command = self.__cntrl.quit())  # type: ignore
+>>>>>>> eb0d64d5e618fc91204eeb9dc1bd621469fe0024
           
-          btn_quitter.grid(row=self.__modele.nb_lig()//2 +1, column=self.__modele.nb_col()+1)
+          btn_quitter.grid(row=self.__modele.nb_lig()//2 +1, column=self.__modele.nb_col()+1, padx=10)
 
+<<<<<<< HEAD
           btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl(False, True))
                     
           btn_retry.grid(row=self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1)
+=======
+          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl.retry()) # type: ignore
+          
+          btn_retry.grid(row=self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1, padx=10)
+>>>>>>> eb0d64d5e618fc91204eeb9dc1bd621469fe0024
           self.init_image()
           self.fenetre.mainloop()
+          return None
 
      def init_image(self):
-            for i in range(1, self.__modele.nb_lig()+1):
-                for j in range(1, self.__modele.nb_col()+1):
+          for i in range(1, self.__modele.nb_lig()+1):
+               for j in range(1, self.__modele.nb_col()+1):
                     case = tkinter.IntVar()
-                    can_image = tkinter.Button(self.fenetre, text='     ', bg=self.couleur_case(i-1, j-1)) # type: ignore
+                    can_image = tkinter.Button(self.fenetre, bg=self.couleur_case(i-1, j-1), padx=8) # type: ignore
                     can_image.grid(row=i, column=j)
 
 
@@ -50,3 +61,11 @@ class Vue:
              return 'purple'
         if coul == 5:
              return 'orange'
+        
+     def quit(self):
+          self.fenetre.destroy
+
+          
+     def retry(self):
+          self.__modele.reinit_jeu()
+          self.init_image()

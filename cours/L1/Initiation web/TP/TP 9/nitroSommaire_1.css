@@ -1,0 +1,22 @@
+body{
+    background-color: #EEEEFF;
+}
+
+nav:first-child{
+    border: 30%;
+    float: left;
+    width: 15%;
+    text-align: center;
+    padding-top: 5px;
+    padding-left: 0%;
+    list-style-image: none;
+}
+
+#contenu{
+    float: right;
+    border: 40%;
+    width: 80%;
+    border-style: solid;
+    border-color: #AAAAFF;
+    padding: 5px;
+}

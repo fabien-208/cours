@@ -18,12 +18,12 @@ class Vue:
                               fg="black")
           lbl_message.grid(row=self.__modele.nb_lig()//2-1, column= self.__modele.nb_col()+1)
     
-          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.__cntrl.quit())  # type: ignore
+          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.__cntrl(True, False))
           
           btn_quitter.grid(row=self.__modele.nb_lig()//2 +1, column=self.__modele.nb_col()+1)
 
-          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl.retry()) # type: ignore
-          
+          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl(False, True))
+                    
           btn_retry.grid(row=self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1)
           self.init_image()
           self.fenetre.mainloop()

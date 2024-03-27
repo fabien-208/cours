@@ -18,26 +18,17 @@ class Vue:
                               fg="black")
           lbl_message.grid(row=self.__modele.nb_lig()//2-1, column= self.__modele.nb_col()+1)
     
-<<<<<<< HEAD
-          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.__cntrl(True, False))
-=======
-          btn_quitter = tkinter.Button(self.fenetre,text="Quit",command = self.__cntrl.quit())  # type: ignore
->>>>>>> eb0d64d5e618fc91204eeb9dc1bd621469fe0024
+          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.fenetre.destroy)
           
           btn_quitter.grid(row=self.__modele.nb_lig()//2 +1, column=self.__modele.nb_col()+1, padx=10)
 
-<<<<<<< HEAD
-          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl(False, True))
+          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command=self.retry()) # type: ignore
                     
           btn_retry.grid(row=self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1)
-=======
-          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command= self.__cntrl.retry()) # type: ignore
-          
-          btn_retry.grid(row=self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1, padx=10)
->>>>>>> eb0d64d5e618fc91204eeb9dc1bd621469fe0024
           self.init_image()
+          self.finie()
           self.fenetre.mainloop()
-          return None
+     
 
      def init_image(self):
           for i in range(1, self.__modele.nb_lig()+1):
@@ -69,3 +60,10 @@ class Vue:
      def retry(self):
           self.__modele.reinit_jeu()
           self.init_image()
+
+     def finie(self):
+          if self.__modele.partie_finie() == True:
+               lbl_message = tkinter.Label(self.fenetre, 
+                              text=('partie finie'),
+                              fg="red")
+               lbl_message.grid(row=self.__modele.nb_lig()//2-2, column= self.__modele.nb_col()+1)

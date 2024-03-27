@@ -1,5 +1,4 @@
 import random
-
 class Modele:
 
     def __init__(self, nb_colonne:int = 12, nb_lignes:int = 12, coul:int = 6) -> None:
@@ -58,7 +57,7 @@ class Modele:
         for i in range(self.__nb_colonne):
             lig = []
             for j in range(self.__nb_ligne):
-                lig.append(random.randint(0, self.__coul-1))
+                lig.append(Case(random.randint(0, self.__coul-1),False, i, j)) 
             plateau.append(lig)
         return plateau
     
@@ -77,7 +76,7 @@ class Modele:
 
 
     def valeur_couleur(self, l:int, c:int) -> int:
-        return self.__jeu[l][c]
+        return self.__jeu[l][c].coul()
     
 
     def choisit_couleur(self, c:int, l:int) -> None:
@@ -102,12 +101,65 @@ class Modele:
                 plateau+= ('| {} '.format(self.__jeu[l][k]))
             plateau += '\n'
         return plateau
-
-
-
-            
-                
     
+    def pose_couleur(self, coul:int, i:int, j:int):
+        self.__jeu[i][j].changer_coul(self)
+
+
+    def partie_finie(self):
+        coul = self.__jeu[0][0].coul()
+        for i in range(self.nb_lig()):
+            for j in range(self.nb_col()):
+                if self.__jeu[i][j].coul() != coul:
+                    return False
+        return True
+
+
+class Case:
+
+    def __init__(self, couleur:int, touché:bool = False, l = 0, c = 0, ) -> None:
+        self.__couleur  = couleur
+        self.__coord = (l, c)
+        self.__touché = touché
+                
+
+
+    def coul(self):
+        return self.__couleur
+
+    def coord(self):
+        return self.__coord
+
+    def val_touché(self):
+        return self.__touché    
+
+    def voisine(self, l, c):
+        if l <= self.nb_lig() and c<= self.nb_col():
+            return ((l, c + 1), (l + 1, c))
+        if l >= self.nb_lig() and c<= self.nb_col():
+            return ((l, c + 1), (l - 1, c))
+        if l <= self.nb_lig() and c>= self.nb_col():
+            return ((l, c - 1), (l + 1, c))
+        if l >= self.nb_lig() and c>= self.nb_col():
+            return ((l, c - 1), (l - 1, c))
+        
+        if l<= self.nb_lig():
+            return ((l, c + 1), (l + 1, c-1), (l + 1, c))
+        if c <= self.nb_col():
+            return ((l, c + 1), (l + 1, c), (l-1,c))
+        if l>= self.nb_lig():
+            return ((l, c + 1), (l - 1, c-1), (l - 1, c))
+        if c >= self.nb_col():
+            return ((l, c - 1), (l + 1, c), (l-1,c))
+        
+        else:
+            return ((l, c + 1),(l + 1, c),(l, c - 1),(l - 1, c))
+
+    def changer_coul(self, coul):
+        self.__couleur = coul
+
+    def touché(self):
+        self.__touché =True
 
 
 if '__main__' == __name__:

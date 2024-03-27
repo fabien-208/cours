@@ -10,7 +10,9 @@ class controle:
         self.__cntrl = self.fonction_button()
         self.__vue = vue_flood.Vue(self.__modele, self.__cntrl)
 
-<<<<<<< HEAD
+
+    def creer_controleur_bouton(self):
+        pass
 
 
     def fonction_button(self, q = False, r= False):
@@ -18,19 +20,9 @@ class controle:
             def quit(self):
                 self.__vue.fenetre.destroy
         if r == True:
-
             def retry(self):
                 self.__modele.reinit_jeu()
                 self.__vue.init_image()
-=======
-    def quit(self) -> None:
-        self.__vue.fenetre.destroy
-
-    def retry(self) -> None:
-        self.__modele.reinit_jeu()
-        self.__vue.init_image()
-        self.demarre()
->>>>>>> eb0d64d5e618fc91204eeb9dc1bd621469fe0024
 
     def demarre(self) -> None:
         self.__modele.init_jeu()

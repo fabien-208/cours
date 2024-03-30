@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Mise en page flexbox</title>
+    <style>
+        body {
+            background-color:#E2DEA9;
+        }
+        h1 {text-align:center}
+        
+        #container {
+            display:grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-auto-rows: 100px;
+        }
+        .elem {
+            border: 5px #EEEEEE solid;
+            padding: 10px;
+        }
+        
+        #el1 {
+            background-color: #FF7F7F;
+            text-align:center;
+            grid-column-start: 3;
+            grid-column-end: 7;
+            grid-row-start: 1;
+            grid-row-end: 3;
+        }
+        
+        #el2 {
+            background-color: lightgreen;
+            grid-column-start: 5; 
+            grid-column-end: 7;
+            grid-row-start: 2; 
+            grid-row-end: 6;
+        }
+        
+        #el3{
+            background-color: lightblue;
+            text-align:right;
+            grid-column-start: 2;
+            grid-column-end: 6;
+            grid-row-start: 4;
+             grid-row-end: 6;
+        }
+        
+        #el4 {
+            background-color: lightyellow;
+            grid-column-start: 2; 
+            grid-column-end: 4;
+            grid-row-start: 1;
+            grid-row-end: 5;        
+        }
+        
+        #el5 {
+            border-right: hidden;
+            background-color: #FF7F7F;
+            grid-column-start: 3;
+            grid-column-end: 4;
+            grid-row-start: 1; 
+            grid-row-end: 3;
+        }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>Grid</h1>
+
+</div>
+<div id="container">
+  <div id="el1" class="elem" >Un</div>
+  <div id="el2" class="elem" >Deux</div>
+  <div id="el3" class="elem" >Trois</div>
+  <div id="el4" class="elem" >Quatre</div>
+  <div id="el5" class="elem"></div>
+</div>
+
+  </body>
+</html>

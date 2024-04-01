@@ -78,5 +78,4 @@ def ouvre_guichet(file, nb_place):
     while not file.est_vide():
         pers = file.enleve()
         if pers <= nb_place:
-            nb_place -= pers
         return nb_place2 -nb_place

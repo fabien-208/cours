@@ -1,0 +1,168 @@
+body{
+    font-family: "Roboto", sans-serif;
+    background-color: rgb(24, 26, 27);
+    color:#b0c4de;
+    width:85%;
+
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+h1, h2{
+    text-align: center;
+
+}
+
+h1{
+    border:solid;
+    border-color: #F7e7Ce;
+}
+table, td{
+    border: solid;
+    border-color: #F7e7Ce;;
+    border-collapse: collapse;
+    text-align: center;
+    width: 50%;
+}
+
+
+a{
+    text-decoration: none;
+    color: #b0c4de;
+}
+a:hover{
+    color: #F7e7Ce;
+}
+
+
+
+ul li{
+    border-style: solid;
+}
+
+/* Styles spécifiques */
+#ingredients,
+#preparation,
+#histoire,
+#allergenes {
+    text-align: left;
+    margin-top: 30px;
+}
+
+.Menu, nav ul li{
+    display: flex;
+    width: auto;
+    align-items: center;
+    list-style-type: none;
+    border-color: #F7e7Ce;
+    border: solid;
+}
+
+/* Styles spécifiques pour les ingrédients */
+.ingredient-container {
+    display: flex;
+    align-items: center;
+}
+
+.ingredient-list {
+    flex: 1;
+    margin-right: 200px; 
+}
+
+.ingredient-images {
+    display: inline-block;
+}
+
+.ingredient-images img, img{
+    width: 100px; 
+    margin-right: 40px; 
+}
+
+/* Styles spécifiques pour la préparation */
+.preparation-container {
+    display: flex;
+    align-items: center;
+}
+
+.preparation-steps {
+    flex: 1;
+    margin-right: 40px; 
+}
+
+.preparation-image {
+    display: inline-block;
+}
+
+.preparation-image img {
+    width: 400px; 
+    margin-right: 30px; 
+}
+
+#his{
+    font-size: 18px;
+    line-height: 1.5; 
+    color: #333; 
+    font-style: italic; 
+    font-weight: bold; 
+    text-align: justify; 
+    background-color: #f7f1e3; 
+    padding: 10px; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#ph_cookies{
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+/* Styles spécifiques */
+#lenny,
+#lenny,
+#lenny,
+#lenny {
+    text-align: left;
+    margin-top: 30px;
+}
+
+/* Styles spécifiques pour les ingrédients */
+.lenny-container {
+    display: flex;
+    align-items: center;
+}
+
+.lenny-list {
+    flex: 1;
+    margin-right: 200px; 
+}
+
+.lenny-images {
+    display: inline-block;
+}
+
+.lenny-images img {
+    width: 100px; 
+    margin-right: 40px; 
+}
+
+/* Styles spécifiques pour la préparation */
+.lenny-container {
+    display: flex;
+    align-items: center;
+}
+
+.lenny-steps {
+    flex: 1;
+    margin-right: 40px; 
+}
+
+.lenny-image {
+    display: inline-block;
+}
+
+.lenny-image img {
+    width: 400px; 
+    margin-right: 30px; 
+}

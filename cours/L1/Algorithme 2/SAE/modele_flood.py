@@ -162,6 +162,13 @@ class Case:
         self.__touché =True
 
 
+
+
+def meilleur_choix_coup(Modele):
+    compteur = 0
+    Modele.__jeu[]
+
+
 if '__main__' == __name__:
     import doctest
     doctest.testmod(verbose=True)

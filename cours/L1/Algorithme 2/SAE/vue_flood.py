@@ -67,3 +67,5 @@ class Vue:
                               text=('partie finie'),
                               fg="red")
                lbl_message.grid(row=self.__modele.nb_lig()//2-2, column= self.__modele.nb_col()+1)
+
+print('FF')

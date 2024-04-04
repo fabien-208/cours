@@ -166,8 +166,7 @@ class Case:
 
 def meilleur_choix_coup(Modele):
     compteur = 0
-    Modele.__jeu[]
-
+    pass
 
 if '__main__' == __name__:
     import doctest

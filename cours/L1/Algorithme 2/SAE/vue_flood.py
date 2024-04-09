@@ -34,7 +34,7 @@ class Vue():
         self.__btn_quitter.place(x = self.__taille_X + 50, y = self.__taille_Y / 2)
         max_score = tkinter.Label(self.__fenetre, text = 'Score Max : ' + str(self.__modele.max_coups()), fg = 'red')
         max_score.place(x = self.__taille_X + 5, y = self.__taille_Y // 2 - 70)
-        self.__bouton_Undo = tkinter.Button(self.__fenetre, text='Undo', command= self.__cntrl.Undo())
+        self.__bouton_Undo = tkinter.Button(self.__fenetre, text='Undo', command= self.__cntrl.Undo)
         self.__bouton_Undo.place(x= self.__taille_X + 25, y = self.__taille_Y / 2 + 28)
     
     def redessine(self)->None:

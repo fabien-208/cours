@@ -64,8 +64,8 @@ class Modele():
                 self.__matrice[i].append(Case((i,j),random.randint(0,self.__couleurs-1),self))
         self.__finie = False
         self.__max_coups = self.monte_carlo()
-        self.__pile = Pile( [],self)
-        self.__pile.push(self.__matrice)
+        self.__pile = []
+        self.__pile.append(self.__matrice)
 
     def nb_lig(self)->int:
         return self.__lig
@@ -155,6 +155,7 @@ class Modele():
         return self.__finie
 
     def pose_couleur(self,coul:int):
+        modele = self
         self.calcul_atteinte()
         self.__score+=1
         self.__matrice[0][0].change_Couleur(coul)
@@ -163,12 +164,13 @@ class Modele():
                 if j.touché():
                     j.change_Couleur(coul)
         self.partie_finie()
+        
 
     def monte_carlo(self)->int:
         compt = 0
         min = 100
 
-        for i in range(5):
+        for i in range(10):
             jeu = deepcopy(self)
             while jeu.finie() == False:
                 couleur = random.randint(0, self.nb_couleurs())
@@ -176,7 +178,6 @@ class Modele():
                 jeu.pose_couleur(couleur)
                 compt += 1
             if compt <= min:
-                print(compt)
                 min = compt
             compt = 0
 
@@ -186,28 +187,35 @@ class Modele():
         return self.__score < self.__max_coups
     
     def pop(self):
-        tr = self.__pile.pop()
+        print('furegbtreg')
+        
+        tr = self.__pile.pop(-1)
         if tr == None:
             pass
         else:
             self.__matrice = tr
         self.__score -= 1 
 
+    def push(self):
+        self.__pile.append(self.__matrice)
 
+
+        
 class Pile:
 
     def __init__(self, pile, Modele) -> None:
         self.__pile = pile
-        self.modele = Modele
+        self.__modele = Modele
 
     def push(self, truc:any):
-        self.__pile.append(truc)
+        self.__modele.__pile.append(truc)
 
     def pop(self):
-        if len(self.__pile) == 0:
+        
+        if len(self.__modele.__pile) == 0:
             return None
         else:
-             return self.__pile.pop()
+            return self.__modele.__pile.pop()
         
     def __len__(self):
-        return len(self.__pile)
+        return len(self.__modele.__pile)

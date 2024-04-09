@@ -1,0 +1,38 @@
+table{
+    border: 3px;
+    border-color: #58acfa;
+    border-style: solid;
+    width: 100%;
+}
+
+thead{
+    text-align: center;
+    font-display: bold;
+    color: white;
+    background-color: black;
+}
+
+tbody{
+    text-align: justify;
+}
+
+tbody tr:nth-child(2n){
+    background-color: #DAF7A6;
+}
+
+caption{
+    color: #0D7215;
+    
+}
+
+td{
+    border-color: black;
+    border: 1px;
+    border-style: solid;
+    border-collapse: collapse;
+}
+
+tr :hover{
+    background-color: red;
+    font-size: 2em;
+}

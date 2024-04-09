@@ -1,174 +1,213 @@
 import random
-class Modele:
 
-    def __init__(self, nb_colonne:int = 12, nb_lignes:int = 12, coul:int = 6) -> None:
-        """
-        >>> mod = Modele()
-        >>> mod.nb_lig()
-        12
-        >>> mod.nb_col()
-        12
-        >>> mod.nb_coul()
-        6
-        >>> print(mod)
-        | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10| 11|
-        ----------------------------------------------------
-        0| 1 | 1 | 0 | 2 | 4 | 0 | 0 | 2 | 0 | 3 | 3 | 0 |
-        ----------------------------------------------------
-        1| 5 | 1 | 0 | 5 | 2 | 5 | 1 | 3 | 5 | 1 | 4 | 3 |
-        ----------------------------------------------------
-        2| 1 | 2 | 5 | 4 | 5 | 1 | 5 | 2 | 2 | 4 | 1 | 1 |
-        ----------------------------------------------------
-        3| 2 | 2 | 0 | 1 | 2 | 4 | 3 | 4 | 0 | 0 | 1 | 0 |
-        ----------------------------------------------------
-        4| 3 | 0 | 0 | 3 | 3 | 3 | 2 | 0 | 1 | 4 | 4 | 0 |
-        ----------------------------------------------------
-        5| 5 | 5 | 1 | 5 | 4 | 0 | 4 | 3 | 5 | 5 | 0 | 5 |
-        ----------------------------------------------------
-        6| 0 | 5 | 4 | 2 | 4 | 5 | 5 | 5 | 0 | 4 | 1 | 3 |
-        ----------------------------------------------------
-        7| 2 | 0 | 5 | 0 | 1 | 0 | 3 | 5 | 3 | 2 | 2 | 2 |
-        ----------------------------------------------------
-        8| 4 | 4 | 1 | 2 | 0 | 2 | 5 | 3 | 3 | 2 | 5 | 0 |
-        ----------------------------------------------------
-        9| 5 | 4 | 4 | 3 | 3 | 2 | 0 | 1 | 2 | 5 | 1 | 2 |
-        ----------------------------------------------------
-        10| 3 | 4 | 1 | 4 | 3 | 5 | 3 | 0 | 4 | 1 | 4 | 0 |
-        ----------------------------------------------------
-        11| 2 | 5 | 3 | 2 | 1 | 2 | 1 | 0 | 4 | 2 | 4 | 4 |
-        ----------------------------------------------------
-        >>> mod.valeur_couleur(0,9)
-        3
-        >>> mod.valeur_couleur(0,0)
-        1
-        >>> mod.choisit_couleur(0,9)
-        >>> mod.valeur_couleur(0,0)
-        3
-        """
-        self.__nb_colonne = nb_colonne
-        self.__nb_ligne = nb_lignes
-        self.__coul = coul
-        self.__score = 0
-        self.__jeu = self.init_jeu()
+from copy import deepcopy
 
-    def init_jeu(self):
+
+class Case():
+    def __init__(self,coords:tuple, couleur:int, modele, atteinte:bool=False)->None:
+        self.__coords = coords
+        self.__couleur = couleur
+        self.__atteinte = atteinte
+        self.__dim_matrice = [modele.nb_col(),modele.nb_lig()]
+        
+    
+    def coord(self)->tuple:
+        return self.__coords
+    def couleur(self)->int:
+        return self.__couleur
+    def touché(self)->bool:
+        return self.__atteinte
+    def dimension(self):
+        return self.__dim_matrice
+    
+    def voisines(self)->list:
+        if self.__coords == (0,0):
+            return [(0,1),(1,0)]
+        elif self.__coords == (0,self.__dim_matrice[1]-1):
+            return [(1,self.__dim_matrice[1]-1),(0,self.__dim_matrice[1]-1)]
+        elif self.__coords == (self.__dim_matrice[0]-1,0):
+            return [(self.__dim_matrice[0]-1,0),(self.__dim_matrice[0]-1,1)]
+        elif self.__coords == (self.__dim_matrice[0]-1, self.__dim_matrice[1]-1):
+            return [(self.__dim_matrice[0]-1,self.__dim_matrice[1]-1),(self.__dim_matrice[0]-1,self.__dim_matrice[1]-1)]
+        
+        elif self.__coords[0] == 0:
+            return [(0,self.__coords[1]+1),(0,self.__coords[1]-1),(1,self.__coords[1])]
+        elif self.__coords[0] == self.__dim_matrice[0]-1:
+            return [(self.__dim_matrice[0]-1,self.__coords[1]-1),(self.__dim_matrice[0]-1,self.__coords[1]+1),(self.__dim_matrice[0]-2,self.__coords[1])]
+        elif self.__coords[1] == 0:
+            return [(self.__coords[0],1),(self.__coords[0]-1,0),(self.__coords[0]+1,0)]
+        elif self.__coords[1] == self.__dim_matrice[1]-1:
+            return [(self.__coords[0]-1,self.__coords[1]),(self.__coords[0]+1,self.__coords[1]),(self.__coords[0],self.__coords[1]-1)]
+
+        else:
+            return [(self.__coords[0]-1,self.__coords[1]),(self.__coords[0]+1,self.__coords[1]),(self.__coords[0],self.__coords[1]+1),(self.__coords[0],self.__coords[1]-1)]
+
+    def change_Couleur(self,couleur:int)->None:
+        self.__couleur = couleur
+    
+    def change_touché(self)->None:
+        self.__atteinte = True
+
+
+class Modele():
+
+    def __init__(self, nb_lignes:int=12, nb_colonnes:int=12, nb_couleurs:int=6)->None:
+
         self.__score = 0
-        plateau = []
-        for i in range(self.__nb_colonne):
-            lig = []
-            for j in range(self.__nb_ligne):
-                lig.append(Case(random.randint(0, self.__coul-1),False, i, j)) 
-            plateau.append(lig)
-        return plateau
+        self.__lig = nb_lignes
+        self.__col = nb_colonnes
+        self.__couleurs = nb_couleurs
+        self.__matrice = []
+        for i in range(self.__lig):
+            self.__matrice.append([])
+            for j in range(self.__col):
+                self.__matrice[i].append(Case((i,j),random.randint(0,self.__couleurs-1),self))
+        self.__finie = False
+        self.__max_coups = self.monte_carlo()
+        self.__pile = Pile( [],self)
+        self.__pile.push(self.__matrice)
+
+    def nb_lig(self)->int:
+        return self.__lig
     
+    def nb_col(self)->int:
+        return self.__col
     
-    def score(self):
+    def nb_couleurs(self)->int:
+        return self.__couleurs
+    
+    def score(self)->int:
         return self.__score
     
-    def nb_lig(self) -> int:
-        return self.__nb_ligne
+    def max_coups(self) -> int:
+        return self.__max_coups
     
-    def nb_col(self) -> int:
-        return self.__nb_colonne
+    def couleur(self,l:int,c:int)->int:
+        return self.__matrice[l][c].couleur()
     
-    def nb_coul(self) -> int:
-        return self.__coul
-
-
-    def valeur_couleur(self, l:int, c:int) -> int:
-        return self.__jeu[l][c].coul()
+    def choisit_couleur(self,l:int,c:int)->None:
+        self.__matrice[0][0].changeCouleur(self.__matrice[l][c].couleur())
     
-
-    def choisit_couleur(self, c:int, l:int) -> None:
-        self.__jeu[0][0] = self.__jeu[c][l]
-
-
-    def reinit_jeu(self):
+    def reinit(self)->None:
         self.__score = 0
-        self.__jeu = self.init_jeu()
+        self.__finie = False
+        self.__matrice = []
+        for i in range(self.__lig):
+            self.__matrice.append([])
+            for j in range(self.__col):
+                self.__matrice[i].append(Case((i,j),random.randint(0,self.__couleurs-1),self))
+        self.__max_coups = self.monte_carlo()
+    
 
     def __str__(self) -> str:
         plateau = ' |'
-        for i in range(self.__nb_colonne):
+        for i in range(self.nb_col):
             plateau += (' {} |'.format(i))
         plateau += '\n'
-        for l in range(self.__nb_ligne):
-            for j in range(self.__nb_ligne):
+        for l in range(self.nb_lig):
+            for j in range(self.__nb_lig):
                 plateau += '----'
             plateau += '\n'
             plateau += ('{}'.format(l))
-            for k in range(self.__nb_colonne):
+            for k in range(self.nb_col):
                 plateau+= ('| {} '.format(self.__jeu[l][k]))
             plateau += '\n'
         return plateau
+
+
+    def voisines(self,l:int,c:int)->list:
+        return self.__matrice[l][c].voisines()
+
+    def calcul_atteinte(self):
+        a_verif=[]
+        verif=[(0,0)]
+        for i in self.voisines(0,0):
+            if self.__matrice[i[0]][i[1]].couleur() == self.__matrice[0][0].couleur():
+                self.__matrice[i[0]][i[1]].change_touché()
+                for j in self.voisines(i[0],i[1]):
+                    if not(j in a_verif) and not(j in verif):
+                        a_verif.append(j)
+            verif.append(self.__matrice[i[0]][i[1]].coord())
+        while len(a_verif) != 0:
+            compt = 0
+            for i in range(len(a_verif)):
+                if self.__matrice[a_verif[0][0]][a_verif[0][1]].couleur() == self.__matrice[0][0].couleur():
+                    self.__matrice[a_verif[0][0]][a_verif[0][1]].change_touché()
+                    verif.append(self.__matrice[a_verif[0][0]][a_verif[0][1]].coord())
+                    for j in self.voisines(a_verif[0][0],a_verif[0][1]):
+                        if not(j in a_verif) and not(j in verif):
+                            a_verif.append(j)
+                else:
+                    verif.append(self.__matrice[a_verif[0][0]][a_verif[0][1]].coord())
+                a_verif.pop(0)
+                compt+=1
     
-    def pose_couleur(self, coul:int, i:int, j:int):
-        self.__jeu[i][j].changer_coul(self)
-
-
     def partie_finie(self):
-        coul = self.__jeu[0][0].coul()
-        for i in range(self.nb_lig()):
-            for j in range(self.nb_col()):
-                if self.__jeu[i][j].coul() != coul:
+        self.__finie = True
+        for i in range(len(self.__matrice)):
+            for j in range(len(self.__matrice[i])):
+                if self.couleur(i, j) != self.couleur(0, 0):
+                    self.__finie = False
                     return False
         return True
+   
+    def finie(self):
+        return self.__finie
 
+    def pose_couleur(self,coul:int):
+        self.calcul_atteinte()
+        self.__score+=1
+        self.__matrice[0][0].change_Couleur(coul)
+        for i in self.__matrice:
+            for j in i:
+                if j.touché():
+                    j.change_Couleur(coul)
+        self.partie_finie()
 
-class Case:
+    def monte_carlo(self)->int:
+        compt = 0
+        min = 100
 
-    def __init__(self, couleur:int, touché:bool = False, l = 0, c = 0, ) -> None:
-        self.__couleur  = couleur
-        self.__coord = (l, c)
-        self.__touché = touché
-                
+        for i in range(5):
+            jeu = deepcopy(self)
+            while jeu.finie() == False:
+                couleur = random.randint(0, self.nb_couleurs())
+                jeu.calcul_atteinte()
+                jeu.pose_couleur(couleur)
+                compt += 1
+            if compt <= min:
+                print(compt)
+                min = compt
+            compt = 0
 
-
-    def coul(self):
-        return self.__couleur
-
-    def coord(self):
-        return self.__coord
-
-    def val_touché(self):
-        return self.__touché    
-
-    def voisine(self, l, c):
-        if l <= self.nb_lig() and c<= self.nb_col():
-            return ((l, c + 1), (l + 1, c))
-        if l >= self.nb_lig() and c<= self.nb_col():
-            return ((l, c + 1), (l - 1, c))
-        if l <= self.nb_lig() and c>= self.nb_col():
-            return ((l, c - 1), (l + 1, c))
-        if l >= self.nb_lig() and c>= self.nb_col():
-            return ((l, c - 1), (l - 1, c))
-        
-        if l<= self.nb_lig():
-            return ((l, c + 1), (l + 1, c-1), (l + 1, c))
-        if c <= self.nb_col():
-            return ((l, c + 1), (l + 1, c), (l-1,c))
-        if l>= self.nb_lig():
-            return ((l, c + 1), (l - 1, c-1), (l - 1, c))
-        if c >= self.nb_col():
-            return ((l, c - 1), (l + 1, c), (l-1,c))
-        
+        return min
+    
+    def win(self) -> bool:
+        return self.__score < self.__max_coups
+    
+    def pop(self):
+        tr = self.__pile.pop()
+        if tr == None:
+            pass
         else:
-            return ((l, c + 1),(l + 1, c),(l, c - 1),(l - 1, c))
-
-    def changer_coul(self, coul):
-        self.__couleur = coul
-
-    def touché(self):
-        self.__touché =True
+            self.__matrice = tr
+        self.__score -= 1 
 
 
+class Pile:
 
+    def __init__(self, pile, Modele) -> None:
+        self.__pile = pile
+        self.modele = Modele
 
-def meilleur_choix_coup(Modele):
-    compteur = 0
-    Modele.__jeu[]
+    def push(self, truc:any):
+        self.__pile.append(truc)
 
-
-if '__main__' == __name__:
-    import doctest
-    doctest.testmod(verbose=True)
+    def pop(self):
+        if len(self.__pile) == 0:
+            return None
+        else:
+             return self.__pile.pop()
+        
+    def __len__(self):
+        return len(self.__pile)

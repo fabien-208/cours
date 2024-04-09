@@ -1,4 +1,5 @@
-import Flood_controleur
+import Cntrl_Flood
 
 if __name__ == "__main__":
-     controle = Flood_controleur.controle().demarre()
+    Cntrl_Flood.floodcontroleur().demarre()
+

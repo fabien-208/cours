@@ -1,69 +1,64 @@
+import tkinter 
+import modele_flood
 
-import tkinter
-import Flood_controleur
 
 
-class Vue:
+TAILLE=25
+class Vue():
 
-     def __init__(self, modele , cntrl) -> None:
-         self.__modele = modele
-         self.__cntrl = cntrl
-         self.fenetre = tkinter.Tk()
-        
+    def __init__(self,modele:modele_flood.Modele,cntrl)->None:
+        self.__modele = modele
+        self.__taille_X = TAILLE*self.__modele.nb_lig()
+        self.__taille_Y = TAILLE*self.__modele.nb_col()
+        self.__cntrl = cntrl
+        self.__fenetre = tkinter.Tk()
+        self.__fenetre.geometry(str(self.__taille_X+90) + "x" + str(self.__taille_Y))
+        self.__fenetre.title("Flood Game")
+        self.__boutons = []
+        self.__couleurs = ["cyan","blue","yellow","purple","orange","red","green"]
+        self.__grille = tkinter.Canvas(width = self.__modele.nb_col() * TAILLE, height = self.__modele.nb_lig() * TAILLE)
 
-     def demarre(self):
-          self.fenetre.title('Flood')
-          lbl_message = tkinter.Label(self.fenetre, 
-                              text=('score :{}'.format(self.__modele.score())),
-                              fg="black")
-          lbl_message.grid(row=self.__modele.nb_lig()//2-1, column= self.__modele.nb_col()+1)
+        for i in range(self.__modele.nb_lig()):
+            self.__boutons.append([])
+            for j in range(self.__modele.nb_col()):
+                control = self.__cntrl.creer_controleur_bouton(i,j)
+                self.__boutons[i].append(tkinter.Button(self.__grille,bg=self.__couleurs[self.__modele.couleur(i,j)], width = TAILLE, height = TAILLE, command = control))
+                self.__boutons[i][j].place(x = j*TAILLE,y = i*TAILLE)
+        self.__grille.pack(side = "left")
+        self.__scorevar = tkinter.StringVar(self.__fenetre, "score : " + str(self.__modele.score()))
+        score = tkinter.Label(self.__fenetre, textvariable = self.__scorevar,fg = "green")
+        score.place(x = self.__taille_X + 20, y = self.__taille_Y / 2 - 25)
+        self.__btn_quitter = tkinter.Button(self.__fenetre,text = "Quit",command = self.__fenetre.destroy)
+        self.__btn_reset = tkinter.Button(self.__fenetre, text = "Retry", command = self.__cntrl.nouvelle_partie)
+        self.__btn_reset.place(x = self.__taille_X + 10, y = self.__taille_Y / 2)
+        self.__btn_quitter.place(x = self.__taille_X + 50, y = self.__taille_Y / 2)
+        max_score = tkinter.Label(self.__fenetre, text = 'Score Max : ' + str(self.__modele.max_coups()), fg = 'red')
+        max_score.place(x = self.__taille_X + 5, y = self.__taille_Y // 2 - 70)
+        self.__bouton_Undo = tkinter.Button(self.__fenetre, text='Undo', command= self.__cntrl.Undo())
+        self.__bouton_Undo.place(x= self.__taille_X + 25, y = self.__taille_Y / 2 + 28)
     
-          btn_quitter = tkinter.Button(self.fenetre, text="Quit",command = self.fenetre.destroy)
-          
-          btn_quitter.grid(row=self.__modele.nb_lig()//2 +1, column=self.__modele.nb_col()+1, padx=10)
+    def redessine(self)->None:
+        self.__grille.delete("all")
+        self.__scorevar.set("score : "+str(self.__modele.score()))
+        for i in range(self.__modele.nb_lig()):
+            for j in range(self.__modele.nb_col()):
+                self.__boutons[i][j].config(bg=self.__couleurs[self.__modele.couleur(i,j)])
+        max_score = tkinter.Label(self.__fenetre, text = 'Score Max : ' + str(self.__modele.max_coups()), fg = 'red')
+        max_score.place(x = self.__taille_X + 5, y = self.__taille_Y // 2 - 70)
 
-          btn_retry = tkinter.Button(self.fenetre,text = 'Retry',command=self.retry()) # type: ignore
-                    
-          btn_retry.grid(row=self.__modele.nb_lig()//2, column=self.__modele.nb_col()+1)
-          self.init_image()
-          self.finie()
-          self.fenetre.mainloop()
-     
-
-     def init_image(self):
-          for i in range(1, self.__modele.nb_lig()+1):
-               for j in range(1, self.__modele.nb_col()+1):
-                    case = tkinter.IntVar()
-                    can_image = tkinter.Button(self.fenetre, bg=self.couleur_case(i-1, j-1), padx=8) # type: ignore
-                    can_image.grid(row=i, column=j)
-
-
-     def couleur_case(self, l, c):
-        coul = self.__modele.valeur_couleur(l, c)
-        if coul == 0:
-             return 'yellow'
-        if coul == 1:
-             return 'red'
-        if coul == 2:
-             return 'blue'
-        if coul == 3:
-             return 'green'
-        if coul == 4:
-             return 'purple'
-        if coul == 5:
-             return 'orange'
+    def demarre(self)->None:
+        self.__fenetre.mainloop()
+    
+    def partie_finie(self, win:bool):
+        if win == True:
+            finie = tkinter.Label(self.__fenetre,text="Partie Finie !")
+            finie.place(x = self.__taille_X + 12, y = self.__taille_Y / 2 - 90)
+            frbh = tkinter.Label(self.__fenetre, text='You Won !!!')
+            frbh.place(x = self.__taille_X +12, y = self.__taille_Y /2 -50)
+            finie.after(6000, finie.destroy)
+            frbh.after(6000, frbh.destroy)
+        else:
+            finie = tkinter.Label(self.__fenetre,text="Partie Finie !")
+            finie.place(x = self.__taille_X + 12, y = self.__taille_Y / 2 - 90)
+            finie.after(6000, finie.destroy)
         
-     def quit(self):
-          self.fenetre.destroy
-
-          
-     def retry(self):
-          self.__modele.reinit_jeu()
-          self.init_image()
-
-     def finie(self):
-          if self.__modele.partie_finie() == True:
-               lbl_message = tkinter.Label(self.fenetre, 
-                              text=('partie finie'),
-                              fg="red")
-               lbl_message.grid(row=self.__modele.nb_lig()//2-2, column= self.__modele.nb_col()+1)

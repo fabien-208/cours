@@ -38,7 +38,7 @@ max3 x y z =
 jugement2 :: [int] -> Char
 jugement2 [] = "Absent"
 jugement2 l =
-    moy = (sum l) / (length l)
+    let moy = (sum l) / (length l) in
     if moy < 10
         then "Absent"
         else if moy < 15
@@ -46,15 +46,15 @@ jugement2 l =
             else "Bravo champion"
 
 
-Est_vide :: [a] -> Bool
-Est_vide l = 
+Estvide :: [a] -> Bool
+Estvide l = 
     if (length l) = 0
         then True
         else False
 
 
-
 "exercice 5"
+
 
 
 maxList :: [Int] -> Int

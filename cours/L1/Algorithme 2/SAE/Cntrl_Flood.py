@@ -7,7 +7,7 @@ class floodcontroleur():
         self.__vue = Vue_Flood.Vue(self.__modele,self)
     
     def creer_controleur_bouton(self,l:int,c:int):
-        self.__modele.push()
+        #self.__modele.push()
         def controleur_bouton() -> None:
             self.__modele.pose_couleur(self.__modele.couleur(l,c))
             self.__vue.redessine()
@@ -34,6 +34,12 @@ class floodcontroleur():
     def Undo(self):
         print('jerjugzrt')
         self.__modele.pop()
+        self.__vue.redessine()
+
+    def reinit_partielle(self):
+        self.__modele.enleve_reinit()
+        self.__modele.reinit_partielle()
+        self.__vue.redessine()
         
 
 

@@ -64,8 +64,10 @@ class Modele():
                 self.__matrice[i].append(Case((i,j),random.randint(0,self.__couleurs-1),self))
         self.__finie = False
         self.__max_coups = self.monte_carlo()
-        self.__pile = []
-        self.__pile.append(self.__matrice)
+        self.__pile = Pile([])
+        #self.__pile.append(self.__matrice)
+        self.__nb_reinit = 3
+
 
     def nb_lig(self)->int:
         return self.__lig
@@ -164,13 +166,14 @@ class Modele():
                 if j.touché():
                     j.change_Couleur(coul)
         self.partie_finie()
+        #self.push()
         
 
     def monte_carlo(self)->int:
         compt = 0
         min = 100
 
-        for i in range(10):
+        for i in range(7):
             jeu = deepcopy(self)
             while jeu.finie() == False:
                 couleur = random.randint(0, self.nb_couleurs())
@@ -187,35 +190,56 @@ class Modele():
         return self.__score < self.__max_coups
     
     def pop(self):
-        print('furegbtreg')
-        
-        tr = self.__pile.pop(-1)
+        tr = self.__pile.pop()
         if tr == None:
             pass
         else:
             self.__matrice = tr
-        self.__score -= 1 
+            self.__score -= 1 
 
-    def push(self):
-        self.__pile.append(self.__matrice)
+    #def push(self):
+    #    self.__pile.push(self.__matrice)
+
+    def reinit_partielle(self):
+        if self.__nb_reinit < 1:
+            pass
+        else:        
+            self.calcul_atteinte()
+            for i in self.__matrice:
+                for j in i:
+                    if j.coord() == (0,0):
+                        pass
+                    else:
+                        if j.touché() == False:
+                            j.change_Couleur(random.randint(0, self.__couleurs))
 
 
-        
+
+
+    def enleve_reinit(self):
+        if self.__nb_reinit == 0:
+            pass
+        else:
+            self.__nb_reinit -=1
+
+    def nb_reinit(self):
+        return self.__nb_reinit
 class Pile:
 
-    def __init__(self, pile, Modele) -> None:
+    def __init__(self, pile) -> None:
         self.__pile = pile
         self.__modele = Modele
 
     def push(self, truc:any):
-        self.__modele.__pile.append(truc)
+        self.__pile.append(truc)
 
     def pop(self):
+        print('fgbthiejklqs!gdjnizevjtfl:bnozrilskjdrtgtjgnjgrgbnjgbngjn')
         
-        if len(self.__modele.__pile) == 0:
+        if len(self.__pile) == 0:
             return None
         else:
-            return self.__modele.__pile.pop()
+            return self.__pile.pop()
         
     def __len__(self):
-        return len(self.__modele.__pile)
+        return len(self.__pile)

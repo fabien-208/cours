@@ -35,11 +35,20 @@ class Vue():
         max_score = tkinter.Label(self.__fenetre, text = 'Score Max : ' + str(self.__modele.max_coups()), fg = 'red')
         max_score.place(x = self.__taille_X + 5, y = self.__taille_Y // 2 - 70)
         self.__bouton_Undo = tkinter.Button(self.__fenetre, text='Undo', command= self.__cntrl.Undo)
-        self.__bouton_Undo.place(x= self.__taille_X + 25, y = self.__taille_Y / 2 + 28)
+        self.__bouton_Undo.place(x= self.__taille_X + 28, y = self.__taille_Y / 2 + 28)
+
+
+        self.__bouton_reinit = tkinter.Button(self.__fenetre, text='reinit partielle', command=self.__cntrl.reinit_partielle)
+        self.__bouton_reinit.place(x=self.__taille_X + 5, y=self.__taille_Y / 2 + 53)
+        self.__var_reinit = tkinter.StringVar(self.__fenetre, "Reste : " + str(self.__modele.nb_reinit()))
+        self.__reinit = tkinter.Label(self.__fenetre, textvariable= self.__var_reinit, fg='black')
+        self.__reinit.place(x= self.__taille_X+ 21, y=self.__taille_Y / 2 + 80)
+
     
     def redessine(self)->None:
         self.__grille.delete("all")
         self.__scorevar.set("score : "+str(self.__modele.score()))
+        self.__var_reinit.set("Reste : " + str(self.__modele.nb_reinit()))
         for i in range(self.__modele.nb_lig()):
             for j in range(self.__modele.nb_col()):
                 self.__boutons[i][j].config(bg=self.__couleurs[self.__modele.couleur(i,j)])

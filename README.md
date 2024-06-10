@@ -1,6 +1,6 @@
 # cours
 
-## cours de licence
+## cours de L1
 >[Semestre 1](cours/L1/Semestre%201/)
 
 >[Semestre 2](cours/L1/Semestre%202)

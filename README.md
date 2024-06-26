@@ -1,6 +1,9 @@
 # cours
 
-## tous les cours
->[cours de L1](cours/L1/)
+## cours de L1
+>[Semestre 1](cours/L1/Semestre%201/)
 
->[cours de lycée](cours/lycée/)
+>[Semestre 2](cours/L1/Semestre%202)
+
+## cours de lycée
+>[NSI](cours/lycée/NSI)

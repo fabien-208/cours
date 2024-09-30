@@ -50,13 +50,26 @@ def det(matrice:list[list[int]]) -> int:
     >>> det(matrice)
     -2
     """
-    pass
+    n = len(matrice)
+    
+    if n == 1:
+        return matrice[0][0]
+    
+    deter = 0
+    for i in range(n):
+        sous_matrice = [row[1:] for j, row in enumerate(matrice) if j != i]
+        
+        deter += (-1) ** i * matrice[i][0] * det(sous_matrice)
+    
+    return deter
 
 # question 5 
 
 def nb_occ(chaine, car, nb=0, x = 0):
     """
-    >>> nb_occ('parapluie', 'a')"""
+    >>> nb_occ('parapluie', 'a')
+    2
+    """
     if x == len(chaine):
         return nb
     else:
@@ -64,12 +77,46 @@ def nb_occ(chaine, car, nb=0, x = 0):
             nb_occ(chaine, car, nb+1, x+1)
         else:
             nb_occ(chaine, car, nb, x+1)
+    
 
 
 # question 6
 
-def anagremme(mot, mot2, i=0):
-    if 
+def anagramme(mot, mot2):
+    """
+    >>> anagramme("chien", "niche") 
+    True
+    >>> anagramme("rat", "tarte")
+    False
+    """
+
+    if len(mot) != len(mot2):
+        return False
+    if len(mot) == 0 and len(mot2) == 0:
+        return True
+    if mot[0] in mot2[-1]:
+        return anagramme(mot[1:], mot2)
+    else:
+        return False
+    
+
+
+# question 7
+
+def Syracuse(N):
+    """
+    >>> Syracuse(10000000)
+    1000
+    """
+    nb = 0
+    while N != 0:
+        if N % 2 == 0:
+            N = 3 * N + 1
+            nb += 1 
+        else: 
+            N = N / 2
+    return nb
+
 
 if __name__ == "__main__":
     import doctest

@@ -1,9 +1,6 @@
 
 # exrcice 1
 
-from traitlets import Bool
-
-
 def fact(n:int) -> int:
     if n == 0:
         return 1
@@ -116,12 +113,27 @@ def triplet_avec_ordre(liste:list[int]):
     """
     >>> l = [4, 0, 7, 3, 5, 7, 5, 2, 1, 3, 6, 9]
     >>> triplet_avec_ordre(l)
-    (1, 3, 4)
+    (3, 5, 7)
     >>> l = [14, 12, 7, 5, 5, 3, 0]
     >>> triplet_avec_ordre(l)
     (-1, -1, -1)
     """
-    pass
+    minu = liste[0]
+    tup = []
+    i = 0
+    while len(tup) <3 and i < len(liste):
+        if liste[i] > minu:
+            minu = liste[i]
+            tup.append(i)
+        i += 1
+
+    if len(tup) >= 3:
+        return (liste[tup[0]], liste[tup[1]], liste[tup[2]])
+    else :
+        return (-1, -1, -1)
+    
+            
+    
 
 
 if __name__ =="__main__":

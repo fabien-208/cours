@@ -45,9 +45,23 @@ int div_de_n(int n) {
 
 
 int puissance(int a , int b){
-    unsigned int som = 0;
+    unsigned int som = 1;
     for(int i = 1;i <= b;i++){
-        som += a*a;
+        som  *= a;
     }
     return som;
+}
+
+
+
+int puissance_rec(int a, int b){
+    if (b==0){
+        return 1;
+    }
+    if (b % 2 == 0){
+        return puissance_rec(a, b/2) * puissance_rec(a, b/2);
+    }
+    else{
+        return a * puissance_rec(a, b-1);
+    }
 }

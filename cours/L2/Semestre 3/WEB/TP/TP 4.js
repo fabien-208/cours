@@ -27,6 +27,29 @@ function moyenne(tab){
 }
 
 
+function occurences(tab, min, max) {
+    let res = {};
+    for (let i = min; i < max; i++) {
+        if (tab[i] in res){
+            res[i] ++
+        } 
+        else{
+            res[i] = 1;
+        }
+    return res;
+    }
+}
+
+
+function stats(tab, min, max){
+    res = occurences(tab, min, max);
+    for (elt in res){
+        elt = elt/tab.length;
+    }
+    return res;
+}
+
+
 function main(){
     console.log(randomInt(10));
     console.log(randomInt2(1, 10));
@@ -34,6 +57,10 @@ function main(){
     var tab = randomIntArray(1, 11, 10);
     console.log(tab)
     console.log(moyenne(tab));
+    var min = 1;
+    var max = 11;
+    console.log(occurences(tab, min, max));
+    console.log(stats(tab, min, max));
 }
 
 

@@ -31,7 +31,7 @@ function occurences(tab, min, max) {
     let res = {};
     for (let i = min; i < max; i++) {
         if (tab[i] in res){
-            res[i] ++
+            res[i] += 1
         } 
         else{
             res[i] = 1;

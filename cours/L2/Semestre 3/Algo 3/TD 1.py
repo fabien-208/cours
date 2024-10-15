@@ -1,5 +1,3 @@
-from re import X
-
 
 def algo (liste:list) -> int:
     
@@ -39,3 +37,22 @@ def polynome(liste, x):
     for i in range(len(liste)):
           res += liste[i]*x**i
     return res
+
+
+
+
+# exerice 8
+
+def somme_egale_k(liste, k):
+    assert(len(liste) > 1)
+    i = 0
+    j = len(liste) - 1
+    while i < j:
+        somme = liste[i] + liste[j]
+        if somme == k:
+            return (liste[i], liste[j])
+        elif somme < k:
+            i += 1
+        else:
+            j -= 1
+    return None 

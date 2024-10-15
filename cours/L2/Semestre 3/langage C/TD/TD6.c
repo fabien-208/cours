@@ -51,6 +51,20 @@ int f(int *a, int n){
 }
 
 
+//exercice 4
+
+
+int Q(int n){
+    if (n == 1 || n == 2){
+        return 1;
+    }
+    else{
+        return Q(n-(Q(n-1))+ Q(n-Q(n-2)));
+    }
+}
+
+
+
 
 
 

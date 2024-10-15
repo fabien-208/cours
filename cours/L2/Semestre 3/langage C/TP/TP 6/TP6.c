@@ -50,6 +50,34 @@ int absolu(int a) {
     }
 }
 
+// exercice 5
+
+int ex_5(int n) {
+    char cahracter;
+    char *mot = (char *)malloc((n + 1) * sizeof(char));
+    if (mot == NULL) {
+        printf("L'allocation de mémoire a échoué.\n");
+        return 0;
+    }
+
+    printf("Entrez un mot de %d lettres: ", n);
+    for (int i = 0; i < n; ++i) {
+        mot[i] = getchar();
+    }
+    mot[n] = '\0';
+    for (int i = 0; i < n; ++i) {
+        if (mot[i] >= 'a' && mot[i] <= 'z') {
+            cahracter += mot[i];
+        }
+    }
+    for (int i = 0; i < n; ++i) {
+        if (mot[i] >= 'A' && mot[i] <= 'Z') {
+            cahracter += mot[i];
+        }
+    }
+    printf(cahracter);
+    return 0;
+}
 
 
 
@@ -60,7 +88,10 @@ int main(void) {
     printf("%d\n", ex_2(54));
     printf("Exercice 4\n");
     int i = -20;
+    printf("Adresse de i: %p\n", (void*)&i);
     printf("%d\n", absolu(i));
+    printf("Exercice 5\n");
+    printf("%d\n", ex_5(5));
     return 0;
 }
 

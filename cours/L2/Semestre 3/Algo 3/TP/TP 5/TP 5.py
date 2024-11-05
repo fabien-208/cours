@@ -1,20 +1,10 @@
 
-# TP4 - Listes chaînées
-# Exercice 1
+# TP5 - Listes chaînées
 
 class Maillon:
 
     def __init__(self, val, suivant=None):
-        """
-        >>> m = Maillon(1)
-        >>> m.get_valeur()
-        1
-        >>> m2 = Maillon(2, m)
-        >>> m2.get_valeur()
-        2
-        >>> m2.suivant().get_valeur()
-        1
-        """
+        
         self.__valeur = val
         self.__suivant = suivant
 
@@ -43,8 +33,8 @@ class Listechaine:
     def __init__(self):
         """
         >>> l = Listechaine()
-        >>> print(l)
-        []
+        >>> l.est_vide()
+        True
         >>> l.est_vide()
         True
         >>> l.append(1)
@@ -91,7 +81,31 @@ class Listechaine:
         >>> l.supprime_paire()
         >>> print(l)
         [5, 3, 1]
+        >>> l.contient(3)
+        True
+        >>> l.append(-3)
+        >>> l.append(5)
+        >>> l.append(-3)
+        >>> print(l)
+        [5, 3, 1, -3, 5, -3]
+        >>> l.indice_minimum()
+        [3, 5]
+        >>> l2 = Listechaine()
+        >>> l2.append(1)
+        >>> l2.append(2)
+        >>> l2.append(10)
+        >>> l2.append(5)
+        >>> l2.append(-2)
+        >>> l2.append(5)
+        >>> l2.append(12)
+        >>> l2.append(10)
+        >>> print(l2)
+        [1, 2, 10, 5, -2, 5, 12, 10]
+        >>> l2.permutes_paires()
+        >>> print(l2)
+        [2, 1, 5, 10, 5, -2, 10, 12]
         """
+        
         self.__tete = None
 
 
@@ -159,8 +173,6 @@ class Listechaine:
                 m = m.suivant()
             m.set_suivant(Maillon(val, m.suivant()))
 
-    # Exercice 3
-
     def appartient(self, val):
         m = self.__tete
         while m != None:
@@ -169,8 +181,6 @@ class Listechaine:
             m = m.suivant()
         return False
     
-    # Exercice 4
-
     def nb_occurences(self, val):
         m = self.__tete
         n = 0
@@ -180,8 +190,6 @@ class Listechaine:
             m = m.suivant()
         return n
     
-    # Exercice 5
-
     def val_maximal(self):
         assert self.__tete != None
         m = self.__tete
@@ -191,8 +199,6 @@ class Listechaine:
                 max = m.get_valeur()
             m = m.suivant()
         return max
-
-    # Exercice 6
 
     def ind_min(self):
         assert self.__tete != None
@@ -211,8 +217,6 @@ class Listechaine:
             cpt += 1
         return ind
     
-    # Exercice 7
-
     def permute_tete_queu(self):
         
         if self.__tete is None or self.__tete.suivant() is None:
@@ -229,8 +233,6 @@ class Listechaine:
         self.__tete.set_suivant(None)
         self.__tete = m
         
-    # Exercice 8
-
     def premiere_repetition(self):
         m = self.__tete
         liste = []
@@ -240,10 +242,7 @@ class Listechaine:
             else:
                 liste.append(m.get_valeur())
                 m = m.suivant()
-        return None
-    
-    # Exercice 9
-        
+        return None        
     
     def supprime_paire(self):
         if self.__tete is None:
@@ -267,9 +266,58 @@ class Listechaine:
             index += 1
 
 
+    # exercie 3
+
+    def contient(self, ind, prec = None):
+        if prec == None:
+            prec = self.__tete
+        if ind == prec.get_valeur():
+            return True
+        if prec.suivant() == None:
+            return False
+        else:
+            return self.contient(ind, prec.suivant())
+
+    # exercice 4
+
+    def indice_minimum(self, m=None, min=None, indices=[], cpt=0):
+        if m is None:
+            m = self.__tete
+            min = m.get_valeur()
+
+        if m is None:
+            return indices
+
+        if m.get_valeur() < min:
+            min = m.get_valeur()
+            indices = [cpt]
+        elif m.get_valeur() == min:
+            indices.append(cpt)
+
+        if m.suivant() == None:
+            return indices
+        else:
+            return self.indice_minimum(m.suivant(), min, indices, cpt + 1)
+
+
+    # exercice 5
+
+    def permutes_paires(self, m=None):
+        if m == None and self.__tete == None:
+            m = self.__tete
+
+        if m.suivant() == None and m == None:
+            return
+
+        tru = m.get_valeur()
+        m.__valeur = m.suivant().get_valeur()
+        m.suivant().__valeur = tru
+        self.permutes_paires(m.suivant().suivant())
+
+
 
 
 
 if __name__ == '__main__':
     import doctest
-    doctest.testmod(verbose=True)
+    doctest.testmod()

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>exercice_2</title>
+    <link rel="stylesheet" href="CSS/css1.css" id="css1">
+    <link rel="stylesheet" href="CSS/css2.css" id="css2">
+    <link rel="stylesheet" href="CSS/css3.css" id="css3">
+</head>
+<body>
+    <h1>Choisissez votre option</h1>
+    <form method="post" id="styleForm" onsubmit="changerCSS(); return false;">
+        <label for="options">Sélectionnez une option :</label>
+        <select id="options" name="options">
+            <option value="CSS1">CSS 1</option>
+            <option value="CSS2">CSS 2</option>
+            <option value="CSS3">CSS 3</option>
+        </select>
+        <br><br>
+        <button type="submit">Valider</button>
+    </form>
+    <script>
+        window.onload = function() {
+            document.getElementById('options').value = 'CSS2';
+            changerCSS();
+        }
+
+        function changerCSS() {
+            const selectedOption = document.getElementById('options').value;
+            document.getElementById('css1').disabled = selectedOption !== 'CSS1';
+            document.getElementById('css2').disabled = selectedOption !== 'CSS2';
+            document.getElementById('css3').disabled = selectedOption !== 'CSS3';
+        }
+        
+    </script>
+</body>
+</html>

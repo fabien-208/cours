@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>exercice 1</title>
+    <style>
+        body {
+            background-color: gray;
+        }
+        #monDiv {
+            margin: 0 25%;
+            height: 20cm;
+            background-color: white;
+            transition: background-image 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="monDiv"></div>
+    <button type="button" onclick="change_color()">Changer le fond</button>
+    <script>
+        const monDiv = document.getElementById('monDiv');
+        const images = [
+            'url(image/image1.jpg)',
+            'url(image/image2.jpg)',
+            'url(image/image3.jpg)',
+            'url(image/image4.jpg)'
+        ];
+        let i = 0;
+
+        monDiv.addEventListener('mouseover', () => {
+            i = (i + 1) % images.length;
+            monDiv.style.backgroundImage = images[i];
+        });
+
+        monDiv.addEventListener('mouseout', () => {
+            monDiv.style.backgroundImage = 'none';
+        });
+
+        function change_color() {
+            document.body.style.backgroundColor = document.body.style.backgroundColor === 'yellow' ? 'gray' : 'yellow';
+        }
+    </script>
+</body>
+</html>

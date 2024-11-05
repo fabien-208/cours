@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        Document
+    </title>
+    <style>
+        body{
+            background-color: gray;
+        }
+
+        #monDiv {
+            margin: 0 25%;
+            height: 20cm;
+            background-color: white;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="monDiv"></div>
+    <button type="button" onclick="change_color()">Changer le fond</button>
+
+    <script>
+        const monDiv = document.getElementById('monDiv');
+
+        monDiv.addEventListener('mouseover', () => {
+            monDiv.style.backgroundColor = 'lightcoral';
+        });
+
+        monDiv.addEventListener('mouseout', () => {
+            monDiv.style.backgroundColor = 'white';
+        });
+
+        function change_color() {
+            document.body.style.backgroundColor = 
+                document.body.style.backgroundColor === 'yellow' ? 'grey' : 'yellow';
+        }
+    </script>
+</body>
+</html>

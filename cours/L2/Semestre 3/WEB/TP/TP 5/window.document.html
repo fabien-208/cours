@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function question1(){
+        document.write("<br>Voici un nombre: ");
+        document.write(42);
+        document.write("<br>Voici une phrase: ");
+        document.write("Hello World !!!");
+        
+        let variable = Math.PI;
+        document.write("<br>Valeur de PI: " + variable);
+        
+        let randomInt = Math.floor(Math.random() * 101);
+        document.write("<br>Entier aléatoire entre 0 et 100: " + randomInt);
+        }
+
+        function question2(){
+            let temperature = prompt("Veuillez saisir la température:");
+            let seuil = 25;
+    
+            if (temperature >= seuil) {
+                document.write("Il fait chaud !");
+            } else {
+                document.write("Il fait frais !");
+            }
+        }
+</script>
+</head>
+<body>
+    <h3>Exercice 1</h3>
+    <script>question1()</script>
+
+    <h3>Exercice 2</h3>
+    <script>question2()</script>
+</body>
+</html>

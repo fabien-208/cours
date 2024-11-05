@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model (DOM)</title>
+    <script src="popup.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Document Object Model (DOM)</h1>
+        <p>Le Document Object Model (DOM) est une interface standardisée par le W3C qui permet d'accéder et de manipuler les documents HTML et XML. Il décrit la structure du document sous forme d'un arbre, où chaque élément représente un nœud de cet arbre. Ce modèle facilite la manipulation des contenus, de la structure et du style de ces documents via des scripts ou des programmes informatiques.</p>
+    </header>
+    <nav>
+        <h2>Sommaire</h2>
+        <ul>
+            <li><a href="#evolution">Évolution du DOM au sein des navigateurs web</a></li>
+            <li><a href="#dom1">DOM 1</a></li>
+            <li><a href="#dom2">DOM 2</a></li>
+            <li><a href="#dom3">DOM 3 et 4</a></li>
+            <li><a href="#techniques">Aspects techniques</a></li>
+            <li><a href="#evenements">Événements</a></li>
+            <li><a href="#references">Notes et Références</a></li>
+            <li><a href="#liens">Liens externes</a></li>
+        </ul>
+    </nav>
+    <main>
+        <section id="evolution">
+            <h2>Évolution du DOM au sein des navigateurs web</h2>
+            <p>Avant sa standardisation par le W3C, chaque navigateur web disposait de son propre modèle de document (DOM). Les développeurs devaient souvent écrire plusieurs versions de scripts pour supporter différents navigateurs.</p>
+            <p>La standardisation a permis de rendre les scripts plus universels, et elle a évolué à travers plusieurs étapes pour étendre ses fonctionnalités.</p>
+        </section>
+
+        <section id="dom1">
+            <h3>DOM 1</h3>
+            <p>La première version standardisée, DOM Level 1, a été publiée en 1998. Elle a introduit un modèle arborescent pour représenter un document, avec des nœuds pour chaque élément (balises HTML ou XML). Elle permettait également de manipuler les formulaires HTML.</p>
+        </section>
+
+        <section id="dom2">
+            <h3>DOM 2</h3>
+            <p>DOM Level 2 a été publié en 2000 et introduit de nouvelles fonctionnalités, telles que la possibilité d'identifier rapidement des éléments avec <code>getElementById()</code>, ainsi que le support des événements, des styles et des vues.</p>
+        </section>
+
+        <section id="dom3">
+            <h3>DOM 3 et 4</h3>
+            <p>DOM Level 3, publié en 2004, a ajouté le support de XPath et des événements clavier, ainsi que la sérialisation des documents XML. DOM Level 4 est encore en développement.</p>
+        </section>
+
+        <section id="techniques">
+            <h2>Aspects techniques</h2>
+            <p>DOM permet de manipuler la structure d'un document en parcourant son arbre d'éléments. Cependant, il peut consommer beaucoup de mémoire lorsque le document est chargé entièrement en mémoire. Pour des cas simples de lecture de documents XML, la méthode SAX est préférée car elle traite les éléments de manière séquentielle.</p>
+        </section>
+
+        <section id="evenements">
+            <h2>Événements</h2>
+            <p>Les événements dans DOM permettent d'interagir avec les éléments d'une page web en fonction des actions de l'utilisateur (clics, saisie clavier, etc.).</p>
+        </section>
+
+        <section id="references">
+            <h2>Notes et Références</h2>
+            <p>Source du texte : <a href="https://fr.wikipedia.org/wiki/Document_Object_Model">Document Object Model sur Wikipédia</a></p>
+        </section>
+    </main>
+    <footer>
+        <section id="liens">
+            <h2>Liens externes</h2>
+            <ul>
+                <li><a href="https://www.w3.org/DOM/">W3C DOM Overview</a></li>
+                <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model">MDN Web Docs: DOM</a></li>
+            </ul>
+        </section>
+        <p>2024 - Présentation du DOM</p>
+    </footer>
+
+</body>
+</html>

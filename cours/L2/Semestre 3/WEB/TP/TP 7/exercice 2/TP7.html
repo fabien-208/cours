@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="TP7.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <h1>Citronault</h1>
+    <br>
+    <h2>votre voiture a la carte</h2>
+    <br>
+    <form>
+        <br>
+        <label for="Motorisation">Motorisation</label><br>
+        <select name="Motorisation" id="Motorisation">
+            <option value="Essence_2">Essence 1.2</option>
+            <option value="Essence_6">Essence 1.6 ( +2000€)</option>
+            <option value="DCI">DCI ( +3000€)</option>
+        </select><br><br>
+        <h3>Nombre de Portes</h3><br>
+        <input type="checkbox" id="porte_3" checked> <label>3 portes</label><br>
+        <input type="checkbox" id="porte_5"> <label>5 portes</label><br>
+        <h3>Options</h3><br>
+        <input type="checkbox" id="clim"> <label>climatisation ( +2000€)</label><br>
+        <input type="checkbox" id="peinture"> <label>Peinture Metallisé ( +300€)</label><br>
+        <input type="checkbox" id="auto_radio"> <label>Auto Radio CD ( +100€)</label><br>
+        <button type="submit" onclick="calcul()">Valider</button>
+        <br><br>
+    </form>
+
+    <p id="totalPrice"></p>
+</body>
+</html>

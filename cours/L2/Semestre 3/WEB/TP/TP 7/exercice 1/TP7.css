@@ -1,0 +1,11 @@
+body{
+    background-color: #444444;
+    color: aliceblue;
+    text-align: center;
+}
+
+
+.error{
+    border-color: red;
+    background-color: lightcoral;
+}

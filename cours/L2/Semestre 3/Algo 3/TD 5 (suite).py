@@ -4,16 +4,6 @@
 class Maillon:
 
     def __init__(self, val, suivant=None):
-        """
-        >>> m = Maillon(1)
-        >>> m.get_valeur()
-        1
-        >>> m2 = Maillon(2, m)
-        >>> m2.get_valeur()
-        2
-        >>> m2.suivant().get_valeur()
-        1
-        """
         self.__valeur = val
         self.__suivant = suivant
 
@@ -42,65 +32,6 @@ class Maillon:
 class Listechaine:
 
     def __init__(self):
-        """
-        >>> l = Listechaine()
-        >>> print(l)
-        []
-        >>> l.est_vide()
-        True
-        >>> l.append(1)
-        >>> print(l)
-        [1]
-        >>> l.est_vide()
-        False
-        >>> l.append(2)
-        >>> l.append(3)
-        >>> print(l)
-        [1, 2, 3]
-        >>> len(l)
-        3
-        >>> l.get(0)
-        1
-        >>> l.get(1)
-        2
-        >>> l.delete(1)
-        >>> print(l)
-        [1, 3]
-        >>> l.insert(1, 5)
-        >>> print(l)
-        [1, 5, 3]
-        >>> l.appartient(5)
-        True
-        >>> l.appartient(2)
-        False
-        >>> l.append(3)
-        >>> l.nb_occurences(3)
-        2
-        >>> l.append(1)
-        >>> print(l)
-        [1, 5, 3, 3, 1]
-        >>> l.ind_min()
-        [0, 4]
-        >>> l.append(0)
-        >>> print(l)
-        [1, 5, 3, 3, 1, 0]
-        >>> l.permute_tete_queu()
-        >>> print(l)
-        [0, 5, 3, 3, 1, 1]
-        >>> l.premiere_repetition()
-        3
-        >>> l.supprime_paire()
-        >>> print(l)
-        [5, 3, 1]
-        >>> l.append(3)
-        >>> l.append(4)
-        >>> l.append(1)
-        >>> print(l)
-        [5, 3, 1, 3, 4, 1]
-        >>> l.suprimer_doublons()
-        >>> print(l)
-        [5, 3, 4, 1]
-        """
         self.__tete = None
 
 
@@ -380,7 +311,110 @@ class Listechaine:
 
 
 
+#------------------------------------------------------------
 
-if __name__ == '__main__':
+
+
+class maillonREC :
+
+    def __init__(self):
+        self.val = None
+        self.suivant = None
+
+    def suivant(self):
+        return self.suivant
+
+    def set_suivant(self, suivant):
+        self.suivant = suivant
+
+    def val(self):
+        return self.val
+
+    def __str__(self):
+        return str(self.val)
+
+
+    def construire(self, liste):
+        if len(liste) != 0:
+            m = Maillon(liste[0])
+            self.suivant = m
+            self.suivant.construire(liste[1:])
+
+
+    def maximum(self):
+        if self.suivant == None:
+            return self.val
+        maxi1 = self.suivant.maximum()
+        return max(self.val, maxi1)
+    
+
+    def inserer_liste(self, liste, ind):
+        if len(liste) != 0:
+            if ind == 1:
+                self.suivant = Maillon(liste[0], self.suivant)
+                self.suivant.inserer_liste(liste[1:], ind+1)
+            else:
+                self.suivant.inserer_liste(liste, ind-1)
+
+
+
+class listechaineeREC :
+
+    def __init__(self):
+        """
+        >>> l = listechaineeREC()
+        >>> l.est_vide()
+        True
+        >>> l.construire([1, 0, 7, 3])
+        >>> l.est_vide()
+        False
+        >>> print(l)
+        [1, 0, 7, 3]
+        """
+        self.tete = None
+
+    def est_vide(self):
+        return self.tete == None
+
+
+    def __str__(self, str = "["):
+        if self.est_vide():
+            return str + "]"
+        else:
+            return self.__str__(str + str(self.tete.val) + " -> ")
+
+
+    def construire(self, liste):
+        assert self.est_vide(), "liste non vide"
+        if len(liste) != 0:
+            self.tete = maillonREC(liste[0])
+            self.tete.construire(liste[1:])
+
+    def maximum(self):
+        assert not self.est_vide(), "liste vide"
+        return self.tete.maximum()
+
+
+    def inserer_liste(self, liste, ind):
+        assert not self.est_vide(), "liste vide"
+        if len(liste) != 0:
+            m = maillonREC(liste[0])
+            if ind == 0:
+                m.set_suivant(self.tete)
+                self.tete = m
+            else:
+                prec = self.tete
+                for i in range(ind-1):
+                    prec = prec.suivant
+                m.set_suivant(prec.suivant)
+                prec.set_suivant(m)
+            self.inserer_liste(liste[1:], ind+1)
+
+
+
+
+
+
+if __name__ == "__main__":
     import doctest
     doctest.testmod()

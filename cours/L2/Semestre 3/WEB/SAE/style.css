@@ -1,0 +1,29 @@
+body{
+
+    background-image: url(ressources/SIAM.jpg);
+    background-repeat: no-repeat;
+
+    background-position: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    background-color: #69DEBC;
+    margin-top: 25%;
+    margin-bottom: 25%;
+}
+
+a{
+    background-color: #69DEBC;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    width: 10%;
+    display: flex;
+    justify-content: center;
+}
+
+a:hover {
+    opacity: 0.7;
+
+}

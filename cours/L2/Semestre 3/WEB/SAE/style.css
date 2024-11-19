@@ -47,4 +47,12 @@ body, html{
     opacity: 0.7;
 
 }
+#boutton_play {
+    transition: background-color 2s ease, opacity 2s ease;
+}
 
+
+#boutton_play:active {
+    background-color: #57c9a5;
+    opacity: 0.9;
+}

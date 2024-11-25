@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jeu de SIAM</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(5, 50px);
+            grid-template-rows: repeat(5, 50px);
+            gap: 2px;
+            margin: 20px auto;
+            width: fit-content;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+        }
+        .cell.rock { background-color: #c2c2c2; }
+        .piece { font-size: 24px; cursor: pointer; }
+        .controls {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jeu de SIAM</h1>
+    <div class="board" id="board"></div>
+    <div class="controls">
+        <p>Tour actuel : <span id="current-turn">Éléphant 🐘</span></p>
+        <button onclick="restartGame()">Redémarrer</button>
+    </div>
+
+    <script>
+        const boardSize = 5;
+        const board = [];
+        const pieces = {
+            elephant: '🐘',
+            rhino: '🦏',
+            rock: '🪨'
+        };
+        const directions = ['up', 'down', 'left', 'right'];
+        let currentTurn = 'elephant';
+
+        function createBoard() {
+            const boardElement = document.getElementById('board');
+            boardElement.innerHTML = '';
+            for (let y = 0; y < boardSize; y++) {
+                board[y] = [];
+                for (let x = 0; x < boardSize; x++) {
+                    const cell = document.createElement('div');
+                    cell.classList.add('cell');
+                    cell.dataset.x = x;
+                    cell.dataset.y = y;
+
+                    // Add rock in the center
+                    if (x === 2 && y === 2) {
+                        cell.classList.add('rock');
+                        cell.innerHTML = pieces.rock;
+                        board[y][x] = { type: 'rock' };
+                    } else {
+                        board[y][x] = null;
+                    }
+
+                    cell.addEventListener('click', () => handleCellClick(x, y));
+                    boardElement.appendChild(cell);
+                }
+            }
+        }
+
+        function handleCellClick(x, y) {
+            const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+            const currentPiece = board[y][x];
+
+            // Placement d'une nouvelle pièce
+            if (!currentPiece) {
+                placePiece(x, y);
+                checkVictory();
+            } 
+            // Rotation de la pièce existante
+            else if (currentPiece.type === currentTurn) {
+                rotatePiece(x, y);
+            } 
+            else {
+                alert('Cette case est soit occupée soit pas votre pièce!');
+            }
+        }
+
+        function placePiece(x, y) {
+            const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+            const piece = { type: currentTurn, direction: 'up' }; // Nouvelle pièce fait face vers le haut
+            board[y][x] = piece;
+
+            cell.innerHTML = `${pieces[currentTurn]} ↑`;
+            switchTurn();
+        }
+
+        function rotatePiece(x, y) {
+            const cell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+            const piece = board[y][x];
+
+            // Trouver la nouvelle direction
+            const currentDirectionIndex = directions.indexOf(piece.direction);
+            const newDirection = directions[(currentDirectionIndex + 1) % 4];
+            piece.direction = newDirection;
+
+            // Mettre à jour l'interface
+            const arrow = getArrowFromDirection(newDirection);
+            cell.innerHTML = `${pieces[piece.type]} ${arrow}`;
+        }
+
+        function getArrowFromDirection(direction) {
+            switch (direction) {
+                case 'up': return '↑';
+                case 'down': return '↓';
+                case 'left': return '←';
+                case 'right': return '→';
+                default: return '';
+            }
+        }
+
+        function movePiece(x, y) {
+            const piece = board[y][x];
+            if (!piece || piece.type !== currentTurn) return;
+
+            const [dx, dy] = getMovementDelta(piece.direction);
+            const newX = x + dx;
+            const newY = y + dy;
+
+            if (isInsideBoard(newX, newY)) {
+                const targetCell = board[newY][newX];
+
+                // Gestion du déplacement de la pierre
+                if (targetCell && targetCell.type === 'rock') {
+                    if (pushRock(newX, newY, dx, dy)) {
+                        movePieceTo(x, y, newX, newY);
+                    }
+                } 
+                // Case vide
+                else if (!targetCell) {
+                    movePieceTo(x, y, newX, newY);
+                }
+            }
+        }
+
+        function pushRock(x, y, dx, dy) {
+            const nextX = x + dx;
+            const nextY = y + dy;
+
+            if (isInsideBoard(nextX, nextY)) {
+                const nextCell = board[nextY][nextX];
+
+                if (!nextCell) {
+                    // La pierre peut être poussée
+                    board[nextY][nextX] = board[y][x];
+                    board[y][x] = null;
+
+                    const targetCell = document.querySelector(`.cell[data-x="${nextX}"][data-y="${nextY}"]`);
+                    const rockCell = document.querySelector(`.cell[data-x="${x}"][data-y="${y}"]`);
+                    targetCell.innerHTML = pieces.rock;
+                    rockCell.innerHTML = '';
+
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function movePieceTo(oldX, oldY, newX, newY) {
+            const piece = board[oldY][oldX];
+            board[newY][newX] = piece;
+            board[oldY][oldX] = null;
+
+            const oldCell = document.querySelector(`.cell[data-x="${oldX}"][data-y="${oldY}"]`);
+            const newCell = document.querySelector(`.cell[data-x="${newX}"][data-y="${newY}"]`);
+
+            const arrow = getArrowFromDirection(piece.direction);
+            newCell.innerHTML = `${pieces[piece.type]} ${arrow}`;
+            oldCell.innerHTML = '';
+
+            switchTurn();
+        }
+
+        function switchTurn() {
+            currentTurn = currentTurn === 'elephant' ? 'rhino' : 'elephant';
+            document.getElementById('current-turn').textContent = currentTurn === 'elephant' ? 'Éléphant 🐘' : 'Rhinocéros 🦏';
+        }
+
+        function getMovementDelta(direction) {
+            switch (direction) {
+                case 'up': return [0, -1];
+                case 'down': return [0, 1];
+                case 'left': return [-1, 0];
+                case 'right': return [1, 0];
+                default: return [0, 0];
+            }
+        }
+
+        function isInsideBoard(x, y) {
+            return x >= 0 && x < boardSize && y >= 0 && y < boardSize;
+        }
+
+        function checkVictory() {
+            for (let i = 0; i < boardSize; i++) {
+                if (board[0][i] && board[0][i].type === 'rock' || board[boardSize - 1][i] && board[boardSize - 1][i].type === 'rock') {
+                    alert(`${currentTurn === 'elephant' ? 'Rhinocéros' : 'Éléphant'} a gagné!`);
+                    restartGame();
+                }
+            }
+        }
+
+        function restartGame() {
+            currentTurn = 'elephant';
+            createBoard();
+        }
+
+        // Initialize game
+        createBoard();
+    </script>
+</body>
+</html>

@@ -1,8 +1,3 @@
-import numpy as np
-
-
-
-
 class Node:
     def __init__(self, gini, num_samples, num_samples_per_class, predicted_class):
         self.gini = gini
@@ -16,11 +11,11 @@ class Node:
 
 def gini_impurity(y):
     m = len(y)
-    return 1.0 - sum((np.sum(y == c) / m) ** 2 for c in np.unique(y))
+    return 1.0 - sum((sum(y == c) / m) ** 2 for c in set(y))
 
 def grow_tree(X, y, depth=0, max_depth=None):
-    num_samples_per_class = [np.sum(y == i) for i in np.unique(y)]
-    predicted_class = np.argmax(num_samples_per_class)
+    num_samples_per_class = [sum(y == i) for i in set(y)]
+    predicted_class = num_samples_per_class.index(max(num_samples_per_class))
     node = Node(
         gini=gini_impurity(y),
         num_samples=len(y),
@@ -45,20 +40,20 @@ def best_split(X, y):
     if m <= 1:
         return None, None
 
-    num_parent = [np.sum(y == c) for c in np.unique(y)]
+    num_parent = [sum(y == c) for c in set(y)]
     best_gini = 1.0 - sum((num / m) ** 2 for num in num_parent)
     best_idx, best_thr = None, None
 
     for idx in range(n):
         thresholds, classes = zip(*sorted(zip(X[:, idx], y)))
-        num_left = [0] * len(np.unique(y))
+        num_left = [0] * len(set(y))
         num_right = num_parent.copy()
         for i in range(1, m):
             c = classes[i - 1]
             num_left[c] += 1
             num_right[c] -= 1
-            gini_left = 1.0 - sum((num_left[x] / i) ** 2 for x in np.unique(y))
-            gini_right = 1.0 - sum((num_right[x] / (m - i)) ** 2 for x in np.unique(y))
+            gini_left = 1.0 - sum((num_left[x] / i) ** 2 for x in set(y))
+            gini_right = 1.0 - sum((num_right[x] / (m - i)) ** 2 for x in set(y))
             gini = (i * gini_left + (m - i) * gini_right) / m
             if thresholds[i] == thresholds[i - 1]:
                 continue
@@ -84,4 +79,4 @@ class DecisionTreeClassifier:
         self.tree_ = grow_tree(X, y, max_depth=self.max_depth)
 
     def predict(self, X):
-        return [predict_tree(self.tree_, x) for x in X]
+        return [predict_tree(self.tree, x) for x in X]

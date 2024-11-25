@@ -1,0 +1,30 @@
+----------------- Exercice 1 -----------------
+
+
+4. pgrep -f date
+5. kill
+7. bg
+8. jobs
+9. ^B n'est pas une commande valide, 
+   mais ^C (Ctrl+C) arrête le processus en cours.
+11. kill -SIGSTOP <PID>
+12. kill -SIGCONT <PID>
+13. kill -SIGTERM <PID2>
+    kill -SIGTERM <PID3>
+14. jobs
+
+
+----------------- Exercice 3 -----------------
+
+1. echo "Entrez votre nom :"
+   read utilisateur
+2. echo "Bienvenue, $utilisateur !"
+3. echo $HOME
+4. export TEST="Bonjour le monde"
+5. env | grep TEST
+6. unset TEST
+   env | grep TEST
+7. date_du_jour=$(date)
+   echo $date_du_jour
+
+8. Une variable d'environnement est accessible à tous les processus enfants, tandis qu'une variable locale n'est accessible qu'au shell ou au processus dans lequel elle a été définie.

@@ -2,6 +2,8 @@
 # include <string.h>
 
 
+// exercice 1
+
 float copier_un_real_v1(float b){
     float a;
     a= b;
@@ -38,6 +40,30 @@ void copier_un_real_v3_sans_egal(float *a, float *b){
 void copier_un_tableau_sans_egal(int a[], int b[], int n){
     memcpy(a, b, n * sizeof(int));
 }
+
+
+
+void * memcpy_version_etudiant(void *destination, const void *source, size_t n){
+
+}
+
+// exercie 2
+
+
+void echange(char *c1, char *c2){
+    *c1 = *c1 ^ *c2;
+    *c2 = *c1 ^ *c2;
+    *c1 = *c1 ^ *c2;
+}
+
+void inverser(char *tab){
+    int len = getc(tab);
+    for (int i =0;i < len ;i++){
+    echange(&tab[i], &tab[len-i-1]);
+    }
+}
+
+
 
 
 

@@ -62,24 +62,3 @@ class Hotte {
     }
 }
 
-
-
-document.getElementById('joujouForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
-    const nom = document.getElementById('nom').value;
-    const poid = parseFloat(document.getElementById('poid').value);
-    const prix = parseFloat(document.getElementById('prix').value);
-    const volume = parseFloat(document.getElementById('volume').value);
-    const estemballé = document.getElementById('estemballé').checked;
-    const dest = document.getElementById('dest').value;
-
-    const joujou = new Joujou(nom, poid, prix, volume, estemballé, dest);
-
-    const hotte = new Hotte(100, 100); // Example values for vol_max and poid_max
-    if (hotte.ajouteJoujou(joujou)) {
-        console.log('Joujou ajouté à la hotte:', joujou);
-    } else {
-        console.log('Impossible d\'ajouter le joujou à la hotte. Poids ou volume dépassé.');
-    }
-});

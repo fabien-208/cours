@@ -1,4 +1,5 @@
 # include <stdio.h>
+# include <stdlib.h>
 
 // exercice 1
 
@@ -40,6 +41,54 @@ int occurence_rec(noeud *tete, int nb){
     if (tete == NULL) {
         return 0;
     }
-    return (tete->element == nb) + occurence_v2(tete->suivant, nb);
+    return (tete->element == nb) + occurence_rec(tete->suivant, nb);
 
 }
+
+
+// exercice 3
+
+
+noeud *creation_de_liste(void){
+    noeud *tete = NULL;
+    noeud *nouveau;
+    int valeur;
+
+    printf("Entrez des entiers (nombre negatif pour arreter) :\n");
+    scanf("%d", &valeur);
+    while (valeur >= 0) {
+        scanf("%d", &valeur);
+        if ((valeur < 0)) {
+            return tete;
+        }  
+        nouveau = (noeud *)malloc(sizeof(noeud));
+        if (nouveau == NULL) {
+            printf("Erreur d'allocation de memoire\n");
+            return NULL;
+        }
+        nouveau->element = valeur;
+        nouveau->suivant = tete;
+        tete = nouveau;
+    }
+    return tete;
+};
+
+
+
+
+void creation_de_liste_v2(noeud **tete){
+    noeud *nouveau;
+    int valeur;
+
+    printf("Entrez des entiers (nombre negatif pour arreter) :\n");
+    while (1) {
+        scanf("%d", &valeur);
+        if (valeur < 0) {
+            break;
+        }   
+        nouveau = (noeud *)malloc(sizeof(noeud));
+        nouveau->element = valeur;
+        nouveau->suivant = *tete;
+        *tete = nouveau;
+    }
+};

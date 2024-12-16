@@ -118,3 +118,7 @@ int main(void){
     return 0;
 
 }
+
+int nbre_motde_taille_n(char *ch, int n){
+    
+}

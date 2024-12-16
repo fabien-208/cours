@@ -1,13 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jeu du SIAM</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
-</head>
-<body id="Jeu">
-    <div id="plateau"></div>
-</body>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Jeu du SIAM</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body id="jeu">
+        <h1>Jeu du SIAM</h1>
+        <div id="info-joueur">
+            <p>Joueur actuel : <span id="current-player">Éléphant</span></p>
+            <button id="reset-btn" type="button">Réinitialiser la Partie</button>
+        </div>
+        <div id="game-board"></div>
+
+        <script src="script.js"></script>
+    </body>
 </html>

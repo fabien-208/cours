@@ -1,11 +1,10 @@
 import tkinter as tk
 from tkinter import ttk
-import controller as ctrl
 
 fenetre = tk.Tk()
 fenetre.title("Choix d'algorithme de classification")
 
-load_button = tk.Button(fenetre, text="Charger données")
+load_button = tk.Button(fenetre, text="Charger données", command=ctrl.load_data)
 load_button.pack(pady=10)
 
 file_status_label = tk.Label(fenetre, text="Aucun fichier chargé")

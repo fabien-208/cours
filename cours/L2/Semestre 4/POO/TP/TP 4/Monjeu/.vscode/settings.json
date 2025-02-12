@@ -1,0 +1,8 @@
+{
+    "java.project.sourcePaths": ["src"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "home/Documents/cours/cours/L2/Semestre 4/POO/TP/TP 4/Mon-jeu/lib/*.jar"
+    ]
+}

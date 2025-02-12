@@ -1,6 +1,8 @@
 // author : moi :)
 // Date: 18.03.2020
 
+import java.lang.classfile.AnnotationValue.OfEnum;
+
 public interface Aliment {
     public String getNom();
     public int getPoids();
@@ -67,5 +69,43 @@ public class Beurre implements Aliment {
         } else {
             return (getNom() + " doux - Poids : " +getPoids() + "gr. - Calories : " + getCalories() + "cal.");
         }
+    }
+}
+
+
+public class oeuf {
+    
+    public static final String nom = "Oeuf";
+    public static final int nb_cal_par_gr = 87;
+    public static final int poids_par_oeuf = 60;
+    private int poids;
+    private int calories;
+    private int quantité;
+    
+
+    Oeuf (int quantité) {
+        this.poids = quantité * poids_par_oeuf;
+        this.quantité = quantité;
+        this.calories = quantité * nb_cal_par_gr;
+    }
+
+    public String getnom() {
+        return nom;
+    }
+
+    public int getPoids() {
+        return poids;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public getquantité() {
+        return quantité;
+    }
+
+    public String StringtoString() {
+        return (getNom() + " - Quantité : " + getquantité() + " - Calories : " + getCalories() + "cal.");
     }
 }

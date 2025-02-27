@@ -10,7 +10,7 @@ public class MonJeu implements IJeuDesBilles {
     
     private int[][] grille;
     private static final int TAILLE = 9; // Taille du plateau (9x9)
-    private static final int NB_COULEURS = 1; // Nombre de couleurs utilisées
+    private static final int NB_COULEURS = 8; // Nombre de couleurs utilisées
     private static final int VIDE = -1;
     private int score = 0;
     private Random random;
@@ -46,7 +46,7 @@ public class MonJeu implements IJeuDesBilles {
     public boolean partieFinie() {
         for (int i = 0; i < TAILLE; i++) {
             for (int j = 0; j < TAILLE; j++) {
-                if (grille[i][j] != -1) {
+                if (grille[i][j] != VIDE) {
                     return false;
                 }
             }
@@ -72,39 +72,55 @@ public class MonJeu implements IJeuDesBilles {
         genererBilles(5); // Générer 5 billes au début
     }
 
-    private void genererBilles(int nombre) {
+    private List<Point> genererBilles(int nombre) {
         nouvellesCouleurs.clear();
+        List<Point> nouvellesBilles = new ArrayList<>();
+    
         for (int i = 0; i < nombre; i++) {
             int x, y;
             do {
                 x = random.nextInt(TAILLE);
                 y = random.nextInt(TAILLE);
-            } while (grille[x][y] != VIDE);
+            } while (grille[x][y] != VIDE); // Trouver une case vide
+    
             int couleur = random.nextInt(NB_COULEURS);
             grille[x][y] = couleur;
             nouvellesCouleurs.add(couleur);
+            nouvellesBilles.add(new Point(x, y)); // Ajouter la position de la nouvelle bille
         }
+        return nouvellesBilles;
     }
+    
 
     public List<Point> deplace(int x1, int y1, int x2, int y2) {
         List<Point> modifications = new ArrayList<>();
+    
         if (grille[x1][y1] != VIDE && grille[x2][y2] == VIDE) {
+            // Déplacement de la bille
             grille[x2][y2] = grille[x1][y1];
             grille[x1][y1] = VIDE;
             modifications.add(new Point(x1, y1));
             modifications.add(new Point(x2, y2));
-            if (check_point() == false) {
-                genererBilles(3);
-            }
+    
+            // Vérification et suppression des alignements
+            check_point();
+    
+            // Génération de 3 nouvelles billes
+            List<Point> nouvellesBilles = genererBilles(3);
+            modifications.addAll(nouvellesBilles); // Ajouter les nouvelles billes à la liste des modifications
         }
         return modifications;
     }
+    
+    
 
     public List<Point> getDernieresModifications() {
         List<Point> modifications = new ArrayList<>();
         for (int i = 0; i < TAILLE; i++) {
             for (int j = 0; j < TAILLE; j++) {
-                modifications.add(new Point(i, j));
+                if (grille[i][j] != VIDE) {
+                    modifications.add(new Point(i, j));
+                }
             }
         }
         return modifications;
@@ -114,55 +130,59 @@ public class MonJeu implements IJeuDesBilles {
     public int[] getNouvellesCouleurs() {
         return nouvellesCouleurs.stream().mapToInt(i -> i).toArray();
     }
+
+
     public boolean check_point() {
         Set<Point> aSupprimer = new HashSet<>();
     
-        // Vérification horizontale
+        // Vérification horizontale (→)
         for (int i = 0; i < TAILLE; i++) {
             for (int j = 0; j <= TAILLE - 5; j++) {
-                if (grille[i][j] != VIDE && estAligné(i, j, 0, 1)) {
+                if (grille[i][j] != VIDE) {
                     ajouterBillesASupprimer(aSupprimer, i, j, 0, 1);
                 }
             }
         }
     
-        // Vérification verticale
+        // Vérification verticale (↓)
         for (int i = 0; i <= TAILLE - 5; i++) {
             for (int j = 0; j < TAILLE; j++) {
-                if (grille[i][j] != VIDE && estAligné(i, j, 1, 0)) {
+                if (grille[i][j] != VIDE) {
                     ajouterBillesASupprimer(aSupprimer, i, j, 1, 0);
                 }
             }
         }
     
-        
     
+        // Si aucune bille à supprimer, retourner false
         if (aSupprimer.isEmpty()) {
             return false;
-        }
-    
+        }    
+        // Augmenter le score en fonction du nombre de billes supprimées
+        score += aSupprimer.size() * 5; // 5 points par bille supprimée
+        // Ajouter les points supprimés aux modifications
         for (Point p : aSupprimer) {
-            grille[p.x][p.y] = VIDE;
+            System.out.println("Suppression : " + p); // Vérification
+            grille[p.x][p.y] = VIDE; // Suppression effective
         }
-        score += (aSupprimer.size() * 5);
-        
-        return true;
-    }
     
-    private boolean estAligné(int x, int y, int dx, int dy) {
-        int couleur = grille[x][y];
-        for (int k = 1; k < 5; k++) {
-            if (grille[x + k * dx][y + k * dy] != couleur) {
-                return false;
-            }
-        }
         return true;
     }
     
     private void ajouterBillesASupprimer(Set<Point> liste, int x, int y, int dx, int dy) {
+        int couleur = grille[x][y];
+        List<Point> tempList = new ArrayList<>();
+    
         for (int k = 0; k < 5; k++) {
-            liste.add(new Point(x + k * dx, y + k * dy));
+            int nx = x + k * dx;
+            int ny = y + k * dy;
+            if (nx < 0 || ny < 0 || nx >= TAILLE || ny >= TAILLE || grille[nx][ny] != couleur) {
+                return;  
+            }
+            tempList.add(new Point(nx, ny));
         }
+        liste.addAll(tempList); // Ajouter toutes les billes détectées à la liste
+
     }
 }
     

@@ -80,6 +80,10 @@ public class MonJeu implements IJeuDesBilles {
         List<Point> nouvellesBilles = new ArrayList<>();
         for (int i = 0; i < nombre; i++) {
             int x, y;
+            /*if (partieFinie()){
+                System.out.println("Partie finie");
+                break;
+            } */
             do {
                 x = random.nextInt(TAILLE);
                 y = random.nextInt(TAILLE);
@@ -89,6 +93,7 @@ public class MonJeu implements IJeuDesBilles {
             grille[x][y] = couleur; // Pose la bille
             nouvellesCouleurs.add(random.nextInt(NB_COULEURS)); // Ajouter une nouvelle couleur
             nouvellesBilles.add(new Point(x, y)); // Ajouter la position de la nouvelle bille
+            check_point(); // Vérification des alignements
         }
         return nouvellesBilles;
     }
@@ -131,7 +136,65 @@ public class MonJeu implements IJeuDesBilles {
     public int[] getNouvellesCouleurs() { // renvoie les nouvelles couleurs
         return nouvellesCouleurs.stream().mapToInt(i -> i).toArray();
     }
+    public boolean check_point() { // Vérifie les alignements et supprime les billes
+        Set<Point> aSupprimer = new HashSet<>();
+    
+        // Vérification horizontale (→)
+        for (int i = 0; i < TAILLE; i++) {
+            for (int j = 0; j <= TAILLE - 5; j++) {
+                if (grille[i][j] != VIDE) {
+                    ajouterBillesASupprimer(aSupprimer, i, j, 0, 1);
+                }
+            }
+        }
+    
+        // Vérification verticale (↓)
+        for (int i = 0; i <= TAILLE - 5; i++) {
+            for (int j = 0; j < TAILLE; j++) {
+                if (grille[i][j] != VIDE) {
+                    ajouterBillesASupprimer(aSupprimer, i, j, 1, 0);
+                }
+            }
+        }
+    
+        // Vérification diagonale (↘)
+        for (int i = 0; i <= TAILLE - 5; i++) {
+            for (int j = 0; j <= TAILLE - 5; j++) {
+                if (grille[i][j] != VIDE) {
+                    ajouterBillesASupprimer(aSupprimer, i, j, 1, 1);
+                }
+            }
+        }
+    
+        // Vérification diagonale (↙)
+        for (int i = 0; i <= TAILLE - 5; i++) {
+            for (int j = 4; j < TAILLE; j++) {
+                if (grille[i][j] != VIDE) {
+                    ajouterBillesASupprimer(aSupprimer, i, j, 1, -1);
+                }
+            }
+        }
+    
+        // Si aucune bille à supprimer, retourner true
+        if (aSupprimer.isEmpty()) {
+            return true;
+        }    
+    
+        score += aSupprimer.size() * 5; // Ajoute 5 points par bille supprimée
+        afficherGrille();
+        // Supprimer les billes de la grille
+        for (Point p : aSupprimer) {
+            System.out.println("Suppression : " + p); // Vérification
+            grille[p.x][p.y] = VIDE; // Suppression effective
+        }
+        System.out.println("Grille après suppression :");
+        afficherGrille(); // Ajoute cette méthode temporairement
 
+        // Retourner false pour indiquer qu'un alignement a été supprimé
+        return false;
+    }
+    
+    /*
 
     public boolean check_point() { // vérifie les points
         Set<Point> aSupprimer = new HashSet<>();
@@ -155,7 +218,7 @@ public class MonJeu implements IJeuDesBilles {
         }
     
     
-        // Si aucune bille à supprimer, retourner false
+        // Si aucune bille à supprimer, retourner true
         if (aSupprimer.isEmpty()) {
             return true;
         }    
@@ -165,10 +228,12 @@ public class MonJeu implements IJeuDesBilles {
             System.out.println("Suppression : " + p); // Vérification
             grille[p.x][p.y] = VIDE; // Suppression effective
         }
-        System.out.println(aSupprimer);
+        aSupprimer.clear();
     
         return false;
     }
+
+    */
     
     private void ajouterBillesASupprimer(Set<Point> liste, int x, int y, int dx, int dy) { // ajoute les billes à supprimer
         int couleur = grille[x][y];
@@ -185,5 +250,17 @@ public class MonJeu implements IJeuDesBilles {
         liste.addAll(tempList); // Ajouter toutes les billes détectées à la liste
 
     }
+
+
+    private void afficherGrille() {
+        for (int i = 0; i < TAILLE; i++) {
+            for (int j = 0; j < TAILLE; j++) {
+                System.out.print(grille[i][j] + "\t");
+            }
+            System.out.println();
+        }
+        System.out.println("-----------------");
+    }
+    
 }
     

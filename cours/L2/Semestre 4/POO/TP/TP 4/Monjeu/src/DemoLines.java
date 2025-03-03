@@ -8,6 +8,3 @@ public class DemoLines {
         fenetre.setVisible(true);
     }
 }
-
-
-    

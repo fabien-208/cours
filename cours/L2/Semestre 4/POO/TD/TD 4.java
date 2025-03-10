@@ -10,7 +10,7 @@ public interface Aliment {
 }
 
 
-public class chocolat implements Aliment {
+public class Chocolat implements Aliment {
     public final static String nom = "Chocolat";
     public final static int nb_cal_par_gr = 5;
     private int poids;
@@ -28,11 +28,11 @@ public class chocolat implements Aliment {
         return poids;
     }
 
-    public String geString() {
+    public String getNom() {
         return nom;
     }
 
-    public String StringtoString() {
+    public String toString() {
         return (getNom() + "- Poids : " +getPoids() + "gr. - Calories : " + getCalories() + "cal.");
     }
 }
@@ -73,7 +73,7 @@ public class Beurre implements Aliment {
 }
 
 
-public class oeuf {
+public class Oeuf implements Aliment {
     
     public static final String nom = "Oeuf";
     public static final int nb_cal_par_gr = 87;
@@ -89,7 +89,7 @@ public class oeuf {
         this.calories = quantité * nb_cal_par_gr;
     }
 
-    public String getnom() {
+    public String getNom() {
         return nom;
     }
 
@@ -101,11 +101,11 @@ public class oeuf {
         return calories;
     }
 
-    public getquantité() {
+    public int getQuantite() {
         return quantité;
     }
 
-    public String StringtoString() {
-        return (getNom() + " - Quantité : " + getquantité() + " - Calories : " + getCalories() + "cal.");
+    public String toString() {
+        return (getNom() + " - Quantité : " + getQuantite() + " - Calories : " + getCalories() + "cal.");
     }
 }
